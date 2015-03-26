@@ -1,0 +1,19 @@
+.bg-air {background: transparent;}
+.bg-apple {background: $apple;color: contrast-color($apple);}
+.bg-tangerine {background: $tangerine;color: contrast-color($tangerine);}
+.bg-banana {background: $banana;color: contrast-color($banana);}
+.bg-kermit {background: $kermit;color: contrast-color($kermit);}
+.bg-sky {background: $sky;color: contrast-color($sky);}
+.bg-berry {background: $berry;color: contrast-color($berry);}
+.bg-light {background: $light;color: contrast-color($light);}
+.bg-dark {background: $dark;color: contrast-color($dark);}
+
+.fg-air {color: transparent;}
+.fg-apple {color: $apple;}
+.fg-tangerine {color: $tangerine;}
+.fg-banana {color: $banana;}
+.fg-kermit {color: $kermit;}
+.fg-sky {color: $sky;}
+.fg-berry {color: $berry;}
+.fg-light {color: $light;}
+.fg-dark {color: $dark;}

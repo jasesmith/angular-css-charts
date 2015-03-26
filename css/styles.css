@@ -45,6 +45,68 @@ p {
   background: #3CF;
   color: #FFF; }
 
+.bg-air {
+  background: transparent; }
+
+.bg-apple {
+  background: #fc1770;
+  color: #FFF; }
+
+.bg-tangerine {
+  background: #ff7f36;
+  color: #363639; }
+
+.bg-banana {
+  background: #fff261;
+  color: #363639; }
+
+.bg-kermit {
+  background: #94ca3d;
+  color: #363639; }
+
+.bg-sky {
+  background: #15c5ec;
+  color: #FFF; }
+
+.bg-berry {
+  background: #c657af;
+  color: #FFF; }
+
+.bg-light {
+  background: #FFF;
+  color: #363639; }
+
+.bg-dark {
+  background: #363639;
+  color: #FFF; }
+
+.fg-air {
+  color: transparent; }
+
+.fg-apple {
+  color: #fc1770; }
+
+.fg-tangerine {
+  color: #ff7f36; }
+
+.fg-banana {
+  color: #fff261; }
+
+.fg-kermit {
+  color: #94ca3d; }
+
+.fg-sky {
+  color: #15c5ec; }
+
+.fg-berry {
+  color: #c657af; }
+
+.fg-light {
+  color: #FFF; }
+
+.fg-dark {
+  color: #363639; }
+
 @-webkit-keyframes floating {
 
   0% {
@@ -490,3 +552,46 @@ section .button {
 
 .as-sortable-hidden {
   display: none !important; }
+
+.chart {
+  box-shadow: 0 0 0 1px;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  border-radius: 100%;
+  font-size: 15rem;
+  background: #EEE; }
+  .chart[type="donut"]:after {
+    border-radius: 100%;
+    content: attr(title);
+    background: #FFF;
+    box-shadow: 0 0 0 1px;
+    width: .7em;
+    height: .7em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+
+.segment {
+  border-radius: 50%;
+  clip: rect(0em, 1em, 1em, 0.5em);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  -webkit-transition: .3s ease-out;
+          transition: .3s ease-out; }
+
+.wedge {
+  border-radius: 50%;
+  clip: rect(0em, 0.5em, 1em, 0em);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  font-family: monospace;
+  -webkit-transition: .3s ease-out;
+          transition: .3s ease-out; }

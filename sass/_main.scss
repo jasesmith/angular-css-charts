@@ -1,0 +1,44 @@
+.chart {
+    box-shadow: 0 0 0 1px;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    margin: 0 auto;
+    border-radius: 100%;
+    font-size: 15rem;
+    background: #EEE;
+    &[type="donut"] {
+        &:after {
+            border-radius: 100%;
+            content: attr(title);
+            background: #FFF;
+            box-shadow: 0 0 0 1px;
+            width: .7em;
+            height: .7em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.segment {
+    border-radius: 50%;
+    clip: rect(0em, 1em, 1em, .5em);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    transition: .3s ease-out;
+}
+
+.wedge {
+    border-radius: 50%;
+    clip: rect(0em, .5em, 1em, 0em);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-family: monospace;
+    transition: .3s ease-out;
+}
