@@ -6,7 +6,7 @@
     margin: 0 auto;
     border-radius: 100%;
     font-size: 15rem;
-    background: #EEE;
+    background: rgba($dark, .1);
     &[type="donut"] {
         &:after {
             border-radius: 100%;
@@ -20,6 +20,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+    }
+    .center-label {
+        font-size: .1em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
     }
 }
 

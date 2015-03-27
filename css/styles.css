@@ -561,7 +561,7 @@ section .button {
   margin: 0 auto;
   border-radius: 100%;
   font-size: 15rem;
-  background: #EEE; }
+  background: rgba(54, 54, 57, 0.1); }
   .chart[type="donut"]:after {
     border-radius: 100%;
     content: attr(title);
@@ -575,6 +575,15 @@ section .button {
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
+  .chart .center-label {
+    font-size: .1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 1; }
 
 .segment {
   border-radius: 50%;
