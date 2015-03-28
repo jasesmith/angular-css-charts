@@ -576,7 +576,7 @@ section .button {
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
   .chart .center-label {
-    font-size: .1em;
+    font-size: .05em;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -604,3 +604,7 @@ section .button {
   font-family: monospace;
   -webkit-transition: .3s ease-out;
           transition: .3s ease-out; }
+
+.overage {
+  background: #363639;
+  color: #FFF; }

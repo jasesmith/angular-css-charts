@@ -1,0 +1,11 @@
+<div class="chart" type="donut">
+    <div ng-repeat="segment in config.segments" class="segment" title="{{segment.label}}" ng-style="rotateSegment(config.segments[$index - 1], $index-1)">
+        <div class="wedge {{segment.class}}" style="background:{{segment.color}}" ng-style="rotateSegment(segment);"></div>
+    </div>
+    <div class="center-label">
+        cap: {{config.capacity}}<br />
+        used: {{totals.actual.num}} / {{totals.actual.pct}}%<br />
+        over: {{totals.overage.num}} / {{totals.overage.pct}}%<br />
+        avail: {{totals.available.num}} / {{totals.available.pct}}%<br />
+    </div>
+</div>

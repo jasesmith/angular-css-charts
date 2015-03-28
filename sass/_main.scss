@@ -22,7 +22,7 @@
         }
     }
     .center-label {
-        font-size: .1em;
+        font-size: .05em;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -50,3 +50,5 @@
     font-family: monospace;
     transition: .3s ease-out;
 }
+
+.overage {background: $dark;color: contrast-color($dark);}

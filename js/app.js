@@ -10,10 +10,22 @@ var colors = [
 ];
 
 angular.module('app', ['ui.sortable'])
-    .controller('appController', ['$scope', 'StorageService', function($scope, storage) {
+    .controller('AppController', ['$scope', 'StorageService', function($scope, storage) {
 
         $scope.headline = 'CSS Charts';
         $scope.icon = 'pie-chart';
+        $scope.chart1 = {
+            capacity: 500,
+            segments: [
+                {label: 'thing 1', value: 90, color: '#fc1770'},
+                {label: 'thing 2', value: 58, color: '#ff7f36'},
+                {label: 'thing 3', value: 50, color: '#fff261'},
+                {label: 'thing 4', value: 130, color: '#94ca3d'},
+                {label: 'thing 5', value: 40, color: '#15c5ec'},
+                {label: 'thing 6', value: 107, color: '#c657af'},
+                {label: 'thing 7', value: 55, color: '#7f3fa6'}
+            ]
+        };
 
         $scope.dragControlListeners = {
             accept: function () {
