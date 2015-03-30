@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('donutChart', ['sectors', function(sectors) {
+    .directive('chart', ['sectors', function(sectors) {
         return {
             restrict: 'E',
             replace: true,
@@ -17,14 +17,15 @@ angular.module('app')
 
                 $scope.totals = sectors.getTotals($scope.config.segments, $scope.config.capacity);
 
-                sectors.processSegments($scope.config.segments, $scope.config.capacity, $scope.totals);
+                sectors.processSectors($scope.config.segments, $scope.config.capacity, $scope.totals);
 
                 // sets dynamic inline style controls for transforms
                 // this makes the sectors work
-                $scope.rotateSegment = function(segment, index, segments) {
-                    segments = segments || $scope.config.segments;
-                    return sectors.setRotation(segment, index, segments);
-                };
+                // $scope.rotateSegment = function(segment, index, segments) {
+                //     segments = segments || $scope.config.segments;
+                //     window.console.log('\n\n');
+                //     return sectors.setRotation(segment, index, segments);
+                // };
             }],
 
             templateUrl: function(element, attr){

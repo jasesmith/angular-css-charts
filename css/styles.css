@@ -553,20 +553,21 @@ section .button {
 .as-sortable-hidden {
   display: none !important; }
 
-.chart {
-  box-shadow: 0 0 0 1px;
+.chart[type="donut"] {
   position: relative;
-  width: 1em;
-  height: 1em;
   margin: 0 auto;
+  background: #363639;
+  background-size: 1rem 1rem;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  font-size: 25vw;
   border-radius: 100%;
-  font-size: 15rem;
-  background: rgba(54, 54, 57, 0.1); }
+  width: 1em;
+  height: 1em; }
   .chart[type="donut"]:after {
     border-radius: 100%;
     content: attr(title);
     background: #FFF;
-    box-shadow: 0 0 0 1px;
     width: .7em;
     height: .7em;
     position: absolute;
@@ -575,7 +576,21 @@ section .button {
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
-  .chart .center-label {
+  .chart[type="donut"] .segment {
+    border-radius: 50%;
+    clip: rect(0em, 1em, 1em, 0.5em);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; }
+    .chart[type="donut"] .segment .wedge {
+      border-radius: 50%;
+      clip: rect(0em, 0.5em, 1em, 0em);
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      font-family: monospace; }
+  .chart[type="donut"] .legend {
     font-size: .05em;
     position: absolute;
     top: 50%;
@@ -584,26 +599,34 @@ section .button {
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
     z-index: 1; }
-
-.segment {
-  border-radius: 50%;
-  clip: rect(0em, 1em, 1em, 0.5em);
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  -webkit-transition: .3s ease-out;
-          transition: .3s ease-out; }
-
-.wedge {
-  border-radius: 50%;
-  clip: rect(0em, 0.5em, 1em, 0em);
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  font-family: monospace;
-  -webkit-transition: .3s ease-out;
-          transition: .3s ease-out; }
+.chart[type="bar"] {
+  font-size: 1rem;
+  border-radius: .5em;
+  width: 60vw;
+  margin: 0 auto; }
+  .chart[type="bar"] .bar {
+    box-shadow: 0 0 0 1px;
+    position: relative;
+    height: 1em;
+    background: rgba(54, 54, 57, 0.15);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row; }
+    .chart[type="bar"] .bar .segment,
+    .chart[type="bar"] .bar .wedge {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 0 0%;
+          -ms-flex: 1 0 0%;
+              flex: 1 0 0%;
+      display: inline-block;
+      height: 100%;
+      width: 100%; }
 
 .overage {
   background: #363639;

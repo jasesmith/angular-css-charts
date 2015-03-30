@@ -1,18 +1,19 @@
 .chart {
-    box-shadow: 0 0 0 1px;
-    position: relative;
-    width: 1em;
-    height: 1em;
-    margin: 0 auto;
-    border-radius: 100%;
-    font-size: 15rem;
-    background: rgba($dark, .1);
     &[type="donut"] {
+        // box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
+        position: relative;
+        margin: 0 auto;
+        background: $dark;
+        @include background-stripes(0.1, 45deg);
+        font-size: 25vw;
+        border-radius: 100%;
+        width: 1em;
+        height: 1em;
         &:after {
             border-radius: 100%;
             content: attr(title);
             background: #FFF;
-            box-shadow: 0 0 0 1px;
+            // box-shadow: 0 0 0 1px; //,  0 0 .05em 0;
             width: .7em;
             height: .7em;
             position: absolute;
@@ -20,35 +21,59 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+        .segment {
+            border-radius: 50%;
+            clip: rect(0em, 1em, 1em, .5em);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            // transition: .3s ease-out;
+            .wedge {
+                border-radius: 50%;
+                clip: rect(0em, .5em, 1em, 0em);
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                font-family: monospace;
+                // transition: .3s ease-out;
+                // box-shadow: 0 0 .05em 0 inset;
+                // opacity: .3;
+            }
+        }
+        .legend {
+            font-size: .05em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
     }
-    .center-label {
-        font-size: .05em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
+    &[type="bar"] {
+        font-size: 1rem;
+        border-radius: .5em;
+        width: 60vw;
+        margin: 0 auto;
+        .bar {
+            box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
+            position: relative;
+            height: 1em;
+            background: rgba($dark, .15);
+            display: flex;
+            flex-direction: row;
+            // overflow: hidden;
+            .segment,
+            .wedge {
+                flex: 1 0 0%;
+                display: inline-block;
+                height: 100%;
+                width: 100%;
+            }
+        }
     }
 }
 
-.segment {
-    border-radius: 50%;
-    clip: rect(0em, 1em, 1em, .5em);
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    transition: .3s ease-out;
-}
 
-.wedge {
-    border-radius: 50%;
-    clip: rect(0em, .5em, 1em, 0em);
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    font-family: monospace;
-    transition: .3s ease-out;
-}
 
 .overage {background: $dark;color: contrast-color($dark);}
