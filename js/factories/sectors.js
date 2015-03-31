@@ -2,11 +2,11 @@ angular.module('app')
     .factory('sectors', [function(){
 
         var setDegree = function(value, total){
-            return (value/total * 360).toFixed(2) * 1;
+            return (value/total * 360).toFixed(1) * 1;
         };
 
         var setPercent = function(value, total){
-            return (value/total * 100).toFixed(2) * 1;
+            return (value/total * 100).toFixed(1) * 1;
         };
 
         var getTotals = function(segments, capacity){
@@ -45,7 +45,7 @@ angular.module('app')
         // more than 180º causes display failure
         var _splitSector = function(segment, index, segments){
             var newSegment = angular.copy(segment);
-            newSegment._degrees = (segment._degrees - 180).toFixed(2) * 1;
+            newSegment._degrees = (segment._degrees - 180).toFixed(1) * 1;
             segment._degrees = 180;
             segment._split = newSegment._degrees;
             newSegment.label = segment.label + ' (cont)';
@@ -54,60 +54,43 @@ angular.module('app')
             // return;
         };
 
-        var processSectors = function(segments, capacity, calcs){
-            // store some metrics
-            calcs = calcs || getTotals(segments, capacity);
+        var _processSectorSplits = function(segments, num){
             var l = segments.length;
-            var prev = 0;
-
-            // convert segment value from n (raw number) into meaningful values
-            // in context of our charts: nº (degrees) and n% (percent)
             _.each(segments, function(segment, i){
                 if(!segment._continued) { // but only for origin segments, not split-off continuations
-                    segment._degrees = setDegree(segment.value, calcs.total.num);
-                    segment._percent = setPercent(segment.value, calcs.total.num);
+                    // convert segment value from n (raw number) into meaningful values
+                    segment._degrees = setDegree(segment.value, num);
+                    // in context of our charts: nº (degrees) and n% (percent)
+                    segment._percent = setPercent(segment.value, num);
                     if(segment._degrees > 180) {
                         _splitSector(segment, i, segments);
                     }
                 }
             });
 
-            // in the event of a split segment that is not a continuation, we
-            // need to manually process the last segment cause the split shifted
-            // the index pointer without the 'each()' knowing about it.
             var lastSegment = _.last(segments);
             if(l < segments.length && !lastSegment._continued) {
-                lastSegment._degrees = setDegree(lastSegment.value, calcs.total.num);
-                lastSegment._percent = setPercent(lastSegment.value, calcs.total.num);
+                lastSegment._degrees = setDegree(lastSegment.value, num);
+                lastSegment._percent = setPercent(lastSegment.value, num);
                 if(lastSegment._degrees > 180) {
                     _splitSector(lastSegment, segments.length, segments);
-                    segments[segments.length-1]._degreeStart = (prev + lastSegment._degrees).toFixed(2);
                 }
             }
+        };
+
+        var processSectors = function(segments, capacity, calcs){
+            // store some metrics
+            calcs = calcs || getTotals(segments, capacity);
+            var prev = 0;
+
+            _processSectorSplits(segments, calcs.total.num);
 
             _.each(segments, function(segment, i){
                 var previousSegment = _previousSector(segments, i);
 
                 prev = prev + (previousSegment ? (segment._continued ? previousSegment._degrees : previousSegment._degrees + (previousSegment._split ? previousSegment._split : 0)) : 0);
-                segment._degreeStart = prev.toFixed(2);
-                window.console.log(segments[i].label, segment._degrees, segment._split, segment._degreeStart);
+                segment._degreeStart = prev.toFixed(1);
             });
-
-            // if capacity is set and an overage exists, treat it like a new
-            // segment and build it, and possibly split it (that's a huge overage!)
-            // if(calcs.overage.num) {
-            //     segments.push({
-            //         label: 'Overage',
-            //         value: calcs.overage.num,
-            //         class: 'overage',
-            //         _overage: true,
-            //         _degrees: setDegree(calcs.overage.num, calcs.total.num),
-            //         _percent: setPercent(calcs.overage.num, calcs.total.num),
-            //         _degreeStart: (lastSegment._degrees + lastSegment._degreeStart * 1)
-            //     });
-            //     _splitSector(_.last(segments), false, segments);
-            // }
-            window.console.log(segments);
         };
 
         // =================== depricated ===================
@@ -154,8 +137,6 @@ angular.module('app')
         return {
             setDegree: setDegree,
             setPercent: setPercent,
-            // splitSegment: splitSegment,
-            // setRotation: setRotation,
             getTotals: getTotals,
             processSectors: processSectors
         };

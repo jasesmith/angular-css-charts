@@ -30,6 +30,13 @@ angular.module('app')
 
             templateUrl: function(element, attr){
                 return 'charts/template-' + attr.template + '.html';
-            }
+            },
+            // link: function(scope, element, attrs){
+            //     scope.$watch(scope.config, function(ov, nv){
+            //         if(ov !== nv) {
+            //             return $.extend(true, angular.copy(nv), scope.config);
+            //         }
+            //     });
+            // }
         };
     }]);

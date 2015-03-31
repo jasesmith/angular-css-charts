@@ -1,79 +1,97 @@
-.chart {
-    &[type="donut"] {
-        // box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
-        position: relative;
-        margin: 0 auto;
-        background: $dark;
-        @include background-stripes(0.1, 45deg);
-        font-size: 25vw;
+@keyframes grow-sector {
+  from {transform: rotate(0deg) scale(.7);}
+}
+
+[type="donut"] {
+    box-shadow: 0 0 0 .025em,  0 .1em .2em 0 rgba(#000, .35);
+    position: relative;
+    margin: 0 auto;
+    background: $dark;
+    @include background-stripes(0.1, 45deg, 0.1em);
+    font-size: 50vw;
+    border-radius: 100%;
+    width: 1em;
+    height: 1em;
+    &:after {
         border-radius: 100%;
-        width: 1em;
-        height: 1em;
-        &:after {
-            border-radius: 100%;
-            content: attr(title);
-            background: #FFF;
-            // box-shadow: 0 0 0 1px; //,  0 0 .05em 0;
-            width: .7em;
-            height: .7em;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .segment {
-            border-radius: 50%;
-            clip: rect(0em, 1em, 1em, .5em);
+        content: attr(title);
+        background: $dark;
+        @include background-stripes(0.1, 45deg, 0.1em);
+        // box-shadow: 0 0 .5em 0 #000 inset;
+        width: 70%;
+        height: 70%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // opacity: .65;
+    }
+    .segment {
+        border-radius: 1em;
+        clip: rect(0em, 1em, 1em, .5em);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        animation: 2s grow-sector;
+        .wedge {
+            border-radius: 1em;
+            clip: rect(0em, .5em, 1em, 0em);
             position: absolute;
             height: 100%;
             width: 100%;
-            overflow: hidden;
-            // transition: .3s ease-out;
-            .wedge {
-                border-radius: 50%;
-                clip: rect(0em, .5em, 1em, 0em);
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                font-family: monospace;
-                // transition: .3s ease-out;
-                // box-shadow: 0 0 .05em 0 inset;
-                // opacity: .3;
-            }
-        }
-        .legend {
-            font-size: .05em;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
+            font-family: monospace;
         }
     }
-    &[type="bar"] {
-        font-size: 1rem;
-        border-radius: .5em;
-        width: 60vw;
-        margin: 0 auto;
-        .bar {
-            box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
-            position: relative;
-            height: 1em;
-            background: rgba($dark, .15);
-            display: flex;
-            flex-direction: row;
-            // overflow: hidden;
-            .segment,
-            .wedge {
-                flex: 1 0 0%;
-                display: inline-block;
-                height: 100%;
-                width: 100%;
+    .legend {
+        font-size: .05em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #FFF;
+        z-index: 1;
+
+    }
+    .labels {
+        position: relative;
+        font-size: .025em;
+        top: 110%;
+        display: flex;
+        flex-direction: row;
+        margin: 1em 0;
+        padding: .5em;
+        background: $dark;
+        color: $light;
+        div {
+            margin: .5em;
+            border-top: 1em solid;
+            flex: 1;
+            span {
+                position: relative;
             }
         }
     }
 }
-
-
-
-.overage {background: $dark;color: contrast-color($dark);}
+[type="bar"] {
+    font-size: 1rem;
+    border-radius: .5em;
+    width: 60vw;
+    margin: 0 auto;
+    .bar {
+        box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
+        position: relative;
+        height: 1em;
+        background: rgba($dark, .15);
+        // display: flex;
+        // flex-direction: row;
+        // overflow: hidden;
+        .segment,
+        .wedge {
+            // flex: 1 0 0%;
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}

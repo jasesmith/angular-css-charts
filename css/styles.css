@@ -553,44 +553,60 @@ section .button {
 .as-sortable-hidden {
   display: none !important; }
 
-.chart[type="donut"] {
+@-webkit-keyframes grow-sector {
+
+  from {
+    -webkit-transform: rotate(0deg) scale(0.7);
+            transform: rotate(0deg) scale(0.7); } }
+
+@keyframes grow-sector {
+  from {
+    -webkit-transform: rotate(0deg) scale(0.7);
+            transform: rotate(0deg) scale(0.7); } }
+[type="donut"] {
+  box-shadow: 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
   position: relative;
   margin: 0 auto;
   background: #363639;
-  background-size: 1rem 1rem;
+  background-size: 0.1em 0.1em;
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-  font-size: 25vw;
+  font-size: 50vw;
   border-radius: 100%;
   width: 1em;
   height: 1em; }
-  .chart[type="donut"]:after {
+  [type="donut"]:after {
     border-radius: 100%;
     content: attr(title);
-    background: #FFF;
-    width: .7em;
-    height: .7em;
+    background: #363639;
+    background-size: 0.1em 0.1em;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+    width: 70%;
+    height: 70%;
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
-  .chart[type="donut"] .segment {
-    border-radius: 50%;
+  [type="donut"] .segment {
+    border-radius: 1em;
     clip: rect(0em, 1em, 1em, 0.5em);
     position: absolute;
     height: 100%;
     width: 100%;
-    overflow: hidden; }
-    .chart[type="donut"] .segment .wedge {
-      border-radius: 50%;
+    overflow: hidden;
+    -webkit-animation: 2s grow-sector;
+            animation: 2s grow-sector; }
+    [type="donut"] .segment .wedge {
+      border-radius: 1em;
       clip: rect(0em, 0.5em, 1em, 0em);
       position: absolute;
       height: 100%;
       width: 100%;
       font-family: monospace; }
-  .chart[type="donut"] .legend {
+  [type="donut"] .legend {
     font-size: .05em;
     position: absolute;
     top: 50%;
@@ -598,17 +614,12 @@ section .button {
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
+    color: #FFF;
     z-index: 1; }
-.chart[type="bar"] {
-  font-size: 1rem;
-  border-radius: .5em;
-  width: 60vw;
-  margin: 0 auto; }
-  .chart[type="bar"] .bar {
-    box-shadow: 0 0 0 1px;
+  [type="donut"] .labels {
     position: relative;
-    height: 1em;
-    background: rgba(54, 54, 57, 0.15);
+    font-size: .025em;
+    top: 110%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -617,17 +628,33 @@ section .button {
     -webkit-box-direction: normal;
     -webkit-flex-direction: row;
         -ms-flex-direction: row;
-            flex-direction: row; }
-    .chart[type="bar"] .bar .segment,
-    .chart[type="bar"] .bar .wedge {
+            flex-direction: row;
+    margin: 1em 0;
+    padding: .5em;
+    background: #363639;
+    color: #FFF; }
+    [type="donut"] .labels div {
+      margin: .5em;
+      border-top: 1em solid;
       -webkit-box-flex: 1;
-      -webkit-flex: 1 0 0%;
-          -ms-flex: 1 0 0%;
-              flex: 1 0 0%;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1; }
+      [type="donut"] .labels div span {
+        position: relative; }
+
+[type="bar"] {
+  font-size: 1rem;
+  border-radius: .5em;
+  width: 60vw;
+  margin: 0 auto; }
+  [type="bar"] .bar {
+    box-shadow: 0 0 0 1px;
+    position: relative;
+    height: 1em;
+    background: rgba(54, 54, 57, 0.15); }
+    [type="bar"] .bar .segment,
+    [type="bar"] .bar .wedge {
       display: inline-block;
       height: 100%;
       width: 100%; }
-
-.overage {
-  background: #363639;
-  color: #FFF; }

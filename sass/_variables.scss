@@ -45,7 +45,7 @@ $code-font: Consolas, Monaco, 'Andale Mono', monospace;
 }
 
 // mixins
-@mixin background-stripes($alpha:0.05, $angle:-45deg) {
-    background-size: 1rem 1rem;
+@mixin background-stripes($alpha:0.05, $angle:-45deg, $size:1rem) {
+    background-size: $size $size;
     background-image: linear-gradient($angle, rgba(#FFF, $alpha) 25%, transparent 25%, transparent 50%, rgba(#FFF, $alpha) 50%, rgba(#FFF, $alpha) 75%, transparent 75%, transparent);
 }
