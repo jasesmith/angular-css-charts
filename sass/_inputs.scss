@@ -29,13 +29,14 @@ input {
         background: none;
         vertical-align: middle;
         // background: rgba($base-light, .1);
+        color: currentColor;
         width: 1em;
         height: 1em;
         line-height: .75;
         text-align: center;
         &:before {
             font-family: FontAwesome;
-            font-size: .7em;
+            font-size: 1em;
         }
     }
 

@@ -2,7 +2,32 @@
   from {transform: rotate(0deg) scale(.7);}
 }
 
+.workspace {
+    &.spacecat {
+        background-image: url(https://pbs.twimg.com/media/BcvmxibIYAAH8a3.jpg);
+        color: #FFF;
+    }
+    &:not(.spacecat) {
+        [format="radial"] {
+            .chart {
+                background-color: $dark;
+            }
+        }
+    }
+}
+
 [type="pie"] {
+    .chart {
+        box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
+        background-color: rgba($dark, .35);
+        @include background-stripes(0.1, 45deg, 0.05em);
+        &:after {
+            background-color: rgba($dark, .35);
+        }
+    }
+    .totals {
+        color: #FFF;
+    }
     .segment {
         .wedge {
             background: currentColor;
@@ -11,13 +36,14 @@
 }
 
 [type="donut"] {
-    // .chart:after {
-    //     background: $dark;
-    //     @include background-stripes(0.1, 45deg, 0.05em);
-    // }
-    // .legend {
-    //     color: #FFF;
-    // }
+    .chart {
+        box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
+        background-color: rgba($dark, .35);
+        @include background-stripes(0.1, 45deg, 0.05em);
+    }
+    .totals {
+        color: #FFF;
+    }
     .segment {
         .wedge {
             border: .1em solid currentColor;
@@ -35,15 +61,12 @@
     width: 1em;
     height: 1em;
     .chart {
-        // box-shadow: 0 0 .3em 0 #000 inset, 0 .1em .2em 0 rgba(#000, .35);
-        // background: $dark;
-        @include background-stripes(0.1, 45deg, 0.05em);
         position: relative;
         width: 1em;
         height: 1em;
         border-radius: 1em;
         overflow: hidden;
-        &.center-plate:after {
+        &:after {
             border-radius: 100%;
             content: attr(title);
             // box-shadow: 0 0 .2em 0 #000 inset;
@@ -53,6 +76,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            pointer-events: none;
             // opacity: 0; //.15;
         }
     }
@@ -72,24 +96,28 @@
             width: 100%;
             font-family: monospace;
             pointer-events: auto;
-            div {
-                background: $dark;
-                color: $light;
-                font-size: .5rem;
-                // position: ;
-                span {
-                    position: relative;
-                    top: 0%;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    z-index: 1;
-                }
-                &:hover {
+            &:hover {
+                .label {
+                    opacity: .85;
                 }
             }
         }
+        .label {
+            font-size: .035em;
+            position: absolute;
+            top: 0%;
+            left: 30%;
+            opacity: 0;
+            span {
+                background: $dark;
+                color: $light;
+                position: absolute;
+                padding: .5em;
+                border-radius: .3em;
+            }
+        }
     }
-    .legend {
+    .totals {
         font-size: .05em;
         position: absolute;
         top: 50%;
@@ -125,9 +153,10 @@
     }
 }
 .chart-wrapper {
-    .labels {
+    position: relative;
+    .legend {
         position: relative;
-        font-size: .035em;
+        font-size: .04em;
         // top: 110%;
         display: flex;
         flex-direction: row;
@@ -155,5 +184,8 @@
                 position: relative;
             }
         }
+    }
+    .supplemental {
+        font-size: 1rem;
     }
 }

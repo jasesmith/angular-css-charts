@@ -348,13 +348,14 @@ input {
   input[type=radio], input[type=checkbox] {
     background: none;
     vertical-align: middle;
+    color: currentColor;
     width: 1em;
     height: 1em;
     line-height: .75;
     text-align: center; }
     input[type=radio]:before, input[type=checkbox]:before {
       font-family: FontAwesome;
-      font-size: .7em; }
+      font-size: 1em; }
   input[type=radio] {
     border-radius: 2em; }
     input[type=radio]:before {
@@ -563,9 +564,33 @@ section .button {
   from {
     -webkit-transform: rotate(0deg) scale(0.7);
             transform: rotate(0deg) scale(0.7); } }
+.workspace.spacecat {
+  background-image: url(https://pbs.twimg.com/media/BcvmxibIYAAH8a3.jpg);
+  color: #FFF; }
+.workspace:not(.spacecat) [format="radial"] .chart {
+  background-color: #363639; }
+
+[type="pie"] .chart {
+  box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
+  background-color: rgba(54, 54, 57, 0.35);
+  background-size: 0.05em 0.05em;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
+  [type="pie"] .chart:after {
+    background-color: rgba(54, 54, 57, 0.35); }
+[type="pie"] .totals {
+  color: #FFF; }
 [type="pie"] .segment .wedge {
   background: currentColor; }
 
+[type="donut"] .chart {
+  box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
+  background-color: rgba(54, 54, 57, 0.35);
+  background-size: 0.05em 0.05em;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
+[type="donut"] .totals {
+  color: #FFF; }
 [type="donut"] .segment .wedge {
   border: .1em solid currentColor; }
 
@@ -576,15 +601,12 @@ section .button {
   width: 1em;
   height: 1em; }
   [format="radial"] .chart {
-    background-size: 0.05em 0.05em;
-    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
     position: relative;
     width: 1em;
     height: 1em;
     border-radius: 1em;
     overflow: hidden; }
-    [format="radial"] .chart.center-plate:after {
+    [format="radial"] .chart:after {
       border-radius: 100%;
       content: attr(title);
       width: 70%;
@@ -594,7 +616,8 @@ section .button {
       left: 50%;
       -webkit-transform: translate(-50%, -50%);
           -ms-transform: translate(-50%, -50%);
-              transform: translate(-50%, -50%); }
+              transform: translate(-50%, -50%);
+      pointer-events: none; }
   [format="radial"] .segment {
     clip: rect(0em, 1em, 1em, 0.5em);
     position: absolute;
@@ -612,19 +635,21 @@ section .button {
       width: 100%;
       font-family: monospace;
       pointer-events: auto; }
-      [format="radial"] .segment .wedge div {
+      [format="radial"] .segment .wedge:hover .label {
+        opacity: .85; }
+    [format="radial"] .segment .label {
+      font-size: .035em;
+      position: absolute;
+      top: 0%;
+      left: 30%;
+      opacity: 0; }
+      [format="radial"] .segment .label span {
         background: #363639;
         color: #FFF;
-        font-size: .5rem; }
-        [format="radial"] .segment .wedge div span {
-          position: relative;
-          top: 0%;
-          left: 50%;
-          -webkit-transform: translateX(-50%);
-              -ms-transform: translateX(-50%);
-                  transform: translateX(-50%);
-          z-index: 1; }
-  [format="radial"] .legend {
+        position: absolute;
+        padding: .5em;
+        border-radius: .3em; }
+  [format="radial"] .totals {
     font-size: .05em;
     position: absolute;
     top: 50%;
@@ -667,44 +692,48 @@ section .button {
       height: 100%;
       width: 100%; }
 
-.chart-wrapper .labels {
-  position: relative;
-  font-size: .035em;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  margin: 2em 0 0 0;
-  padding: .5em;
-  background: #363639; }
-  .chart-wrapper .labels div {
-    margin: .5em;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 1 25%;
-        -ms-flex: 0 1 25%;
-            flex: 0 1 25%;
-    line-height: 0; }
-    .chart-wrapper .labels div:before {
-      content: '';
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      background: currentColor;
-      margin-right: .5em;
-      vertical-align: middle;
-      border-radius: .1em; }
-    .chart-wrapper .labels div span {
-      color: #FFF;
-      position: relative; }
+.chart-wrapper {
+  position: relative; }
+  .chart-wrapper .legend {
+    position: relative;
+    font-size: .04em;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    margin: 2em 0 0 0;
+    padding: .5em;
+    background: #363639; }
+    .chart-wrapper .legend div {
+      margin: .5em;
+      -webkit-box-align: start;
+      -webkit-align-items: flex-start;
+          -ms-flex-align: start;
+              align-items: flex-start;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 1 25%;
+          -ms-flex: 0 1 25%;
+              flex: 0 1 25%;
+      line-height: 0; }
+      .chart-wrapper .legend div:before {
+        content: '';
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        background: currentColor;
+        margin-right: .5em;
+        vertical-align: middle;
+        border-radius: .1em; }
+      .chart-wrapper .legend div span {
+        color: #FFF;
+        position: relative; }
+  .chart-wrapper .supplemental {
+    font-size: 1rem; }

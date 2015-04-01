@@ -1,5 +1,5 @@
 angular.module('app')
-    .factory('sectors', [function(){
+    .directive('chart', [function() {
 
         var setDegree = function(value, total){
             return (value/total * 360).toFixed(1) * 1;
@@ -16,7 +16,7 @@ angular.module('app')
             var available = 0;
 
             _.each(segments, function(segment){
-                actual = actual + segment.value;
+                actual = actual + (segment.value * 1);
             });
 
             total = actual;
@@ -97,9 +97,40 @@ angular.module('app')
         };
 
         return {
-            setDegree: setDegree,
-            setPercent: setPercent,
-            getTotals: getTotals,
-            processSectors: processSectors
+            restrict: 'E',
+            replace: true,
+            scope: {
+                config: '=?'
+            },
+            controller: ['$scope', function($scope){
+                var defaultConfig = {
+                    capacity: 0,
+                    segments: []
+                };
+
+                $scope.config = $.extend(true, defaultConfig, $scope.config);
+
+                $scope.totals = getTotals($scope.config.segments, $scope.config.capacity);
+
+                $scope.config.segments = processSectors($scope.config.segments, $scope.config.capacity, $scope.totals);
+
+                // $scope.$watch(function(){
+                //     return $scope.config;
+                //     }, function(newVal, oldVal){
+                //         // window.console.log('dir watcher', newVal, oldVal);
+                //         if(newVal !== oldVal) {
+                //             $scope.config = $.extend(true, defaultConfig, $scope.config);
+                //             $scope.totals = getTotals($scope.config.segments, $scope.config.capacity);
+                //             $scope.config.segments = processSectors($scope.config.segments, $scope.config.capacity, $scope.totals);
+                //         }
+                //     },
+                //     true
+                // );
+            }],
+
+            templateUrl: function(element, attr){
+                return 'charts/template-' + attr.template + '.html';
+            }
+
         };
     }]);

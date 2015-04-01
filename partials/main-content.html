@@ -1,17 +1,29 @@
-{{template}}
-
-<chart config="chart1" template="donut" ng-if="template == 'donut'"></chart>
-<chart config="chart1" template="pie" ng-if="template == 'pie'"></chart>
-<chart config="chart1" template="bar" ng-if="template == 'bar'"></chart>
-
-<!-- <chart config="chart1" template="bar"></chart> -->
-
 <div class="controls">
-    <label><input type="radio" ng-model="template" value="donut" /> Donut</label>
-    <label><input type="radio" ng-model="template" value="pie" /> Pie</label>
-    <label><input type="radio" ng-model="template" value="bar" /> Bar</label>
+    <!-- <label><input type="checkbox" ng-model="spacecat" value="true" /> SpaceCat</label> -->
+    <!-- <div>
+        <label><input type="radio" ng-model="template" value="donut" /> Donut</label><br />
+        <label><input type="radio" ng-model="template" value="pie" /> Pie</label><br />
+        <label><input type="radio" ng-model="template" value="bar" /> Bar</label>
+    </div> -->
+
     <!-- <label ng-repeat="segment in chart1.segments">
-        <input type="range" ng-model="segment._degrees" min="0" max="{{chart1.capacity}}" /> {{segment._degrees}}
+        <input type="range" ng-model="chart1.segments[$index].value" min="0" max="{{chart1.capacity}}" /> {{segment.value}}
     </label> -->
+    <!-- <div>
+        Capacity: <input type="number" min="1" value="{{chart1.capacity}}" />
+        <div ng-repeat="segment in chart1.segments track by $index">
+            <label>
+                {{segment.label}}
+                <input type="range" value="{{segment.value}}" ng-model="segment.value" min="0" max="{{chart1.capacity}}" />
+                {{segment.value}} <span ng-click="removeSector($index)">[&times;]</span>
+            </label>
+        </div>
+    </div>
+    <button ng-click="addSector()">new sector</button> -->
 </div>
+
+<chart config="chart1" template="donut" xng-if="template == 'donut'"></chart>
+<!-- <chart config="chart1" template="pie" xng-if="template == 'pie'"></chart> -->
+<!-- <chart config="chart1" template="bar" xng-if="template == 'bar'"></chart> -->
+
 <!-- <pre style="font-size: 1rem;">{{chart1.segments | json}}</pre> -->

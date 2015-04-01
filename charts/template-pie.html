@@ -2,10 +2,10 @@
     <div class="chart">
         <div ng-repeat="segment in config.segments track by $index" class="segment" style="transform: rotate({{segment._degreeStart}}deg) scale(1)">
             <div class="wedge {{segment.class}}" title="{{segment.label}}" ng-class="{'continued': segment._continued}" style="color:{{segment.color}};transform: rotate({{segment._degrees}}deg);">
-                <!-- <div style="transform: rotate(-{{(segment._degreeStart*1) + (segment._degrees*1)}}deg)"><span>{{segment.label}}</span></div> -->
+                <div class="label" style="transform: rotate(-{{(segment._degreeStart*1) + (segment._degrees*1)}}deg)"><span>{{segment.label}}</span></div>
             </div>
         </div>
-        <div class="legend">
+        <div class="totals">
             cap: {{config.capacity}}<br />
             used: {{totals.actual.num}} / {{totals.actual.pct}}%<br />
             over: {{totals.overage.num}} / {{totals.overage.pct}}%<br />
@@ -13,7 +13,7 @@
         </div>
         <!-- scale({{(segment._continued ? (1 - (($index-1)/36)) : (1 - ($index/36)))}}) -->
     </div>
-    <div class="labels">
+    <div class="legend">
         <div ng-repeat="segment in config.segments track by $index" style="color:{{segment.color}};" ng-if="!segment._continued">
             <span>{{segment.label}}</span>
         </div>
