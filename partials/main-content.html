@@ -1,9 +1,17 @@
-<chart config="chart1" template="donut"></chart>
+{{template}}
+
+<chart config="chart1" template="donut" ng-if="template == 'donut'"></chart>
+<chart config="chart1" template="pie" ng-if="template == 'pie'"></chart>
+<chart config="chart1" template="bar" ng-if="template == 'bar'"></chart>
 
 <!-- <chart config="chart1" template="bar"></chart> -->
 
-<!-- <div class="controls">
-    <label ng-repeat="segment in chart1.segments">
+<div class="controls">
+    <label><input type="radio" ng-model="template" value="donut" /> Donut</label>
+    <label><input type="radio" ng-model="template" value="pie" /> Pie</label>
+    <label><input type="radio" ng-model="template" value="bar" /> Bar</label>
+    <!-- <label ng-repeat="segment in chart1.segments">
         <input type="range" ng-model="segment._degrees" min="0" max="{{chart1.capacity}}" /> {{segment._degrees}}
-    </label>
-</div> -->
+    </label> -->
+</div>
+<!-- <pre style="font-size: 1rem;">{{chart1.segments | json}}</pre> -->

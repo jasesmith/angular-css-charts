@@ -1,7 +1,7 @@
-<div class="chart" type="bar">
-    <div class="bar">
-        <div ng-repeat="segment in config.segments" class="segment" title="{{segment.label}}" style="width: {{segment._percent}}%">
-            <div class="wedge {{segment.class}}" style="background:{{segment.color}};"></div>
+<div class="chart-wrapper" type="bar">
+    <div class="chart">
+        <div ng-repeat="segment in config.segments track by $index | filter:!segment._continued" class="segment" title="{{segment.label}}" style="flex-basis: {{segment._percent}}%">
+            <div class="value {{segment.class}}" style="background:{{segment.color}};"></div>
         </div>
     </div>
     <div class="legend">
@@ -11,4 +11,9 @@
         avail: {{totals.available.num}} / {{totals.available.pct}}%<br />
     </div>
     <!-- scale({{(segment._continued ? (1 - (($index-1)/36)) : (1 - ($index/36)))}}) -->
+    <div class="labels">
+        <div ng-repeat="segment in config.segments track by $index" style="color:{{segment.color}};" ng-if="!segment._continued">
+            <span>{{segment.label}}</span>
+        </div>
+    </div>
 </div>

@@ -12,31 +12,16 @@ angular.module('app')
                     segments: []
                 };
 
-                // pull in app's menu config or from MenuConfig provider
                 $scope.config = $.extend(true, angular.copy(defaultConfig), $scope.config);
 
                 $scope.totals = sectors.getTotals($scope.config.segments, $scope.config.capacity);
 
-                sectors.processSectors($scope.config.segments, $scope.config.capacity, $scope.totals);
-
-                // sets dynamic inline style controls for transforms
-                // this makes the sectors work
-                // $scope.rotateSegment = function(segment, index, segments) {
-                //     segments = segments || $scope.config.segments;
-                //     window.console.log('\n\n');
-                //     return sectors.setRotation(segment, index, segments);
-                // };
+                $scope.config.segments = sectors.processSectors($scope.config.segments, $scope.config.capacity, $scope.totals);
             }],
 
             templateUrl: function(element, attr){
+                window.console.log(element);
                 return 'charts/template-' + attr.template + '.html';
             },
-            // link: function(scope, element, attrs){
-            //     scope.$watch(scope.config, function(ov, nv){
-            //         if(ov !== nv) {
-            //             return $.extend(true, angular.copy(nv), scope.config);
-            //         }
-            //     });
-            // }
         };
     }]);

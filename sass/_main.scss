@@ -2,45 +2,91 @@
   from {transform: rotate(0deg) scale(.7);}
 }
 
+[type="pie"] {
+    .segment {
+        .wedge {
+            background: currentColor;
+        }
+    }
+}
+
 [type="donut"] {
-    box-shadow: 0 0 0 .025em,  0 .1em .2em 0 rgba(#000, .35);
+    // .chart:after {
+    //     background: $dark;
+    //     @include background-stripes(0.1, 45deg, 0.05em);
+    // }
+    // .legend {
+    //     color: #FFF;
+    // }
+    .segment {
+        .wedge {
+            border: .1em solid currentColor;
+            &.continued {
+                // border-left: .03em solid;
+            }
+        }
+    }
+}
+
+[format="radial"] {
     position: relative;
     margin: 0 auto;
-    background: $dark;
-    @include background-stripes(0.1, 45deg, 0.1em);
     font-size: 50vw;
-    border-radius: 100%;
     width: 1em;
     height: 1em;
-    &:after {
-        border-radius: 100%;
-        content: attr(title);
-        background: $dark;
-        @include background-stripes(0.1, 45deg, 0.1em);
-        // box-shadow: 0 0 .5em 0 #000 inset;
-        width: 70%;
-        height: 70%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        // opacity: .65;
+    .chart {
+        // box-shadow: 0 0 .3em 0 #000 inset, 0 .1em .2em 0 rgba(#000, .35);
+        // background: $dark;
+        @include background-stripes(0.1, 45deg, 0.05em);
+        position: relative;
+        width: 1em;
+        height: 1em;
+        border-radius: 1em;
+        overflow: hidden;
+        &.center-plate:after {
+            border-radius: 100%;
+            content: attr(title);
+            // box-shadow: 0 0 .2em 0 #000 inset;
+            width: 70%;
+            height: 70%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            // opacity: 0; //.15;
+        }
     }
     .segment {
-        border-radius: 1em;
         clip: rect(0em, 1em, 1em, .5em);
         position: absolute;
         height: 100%;
         width: 100%;
         overflow: hidden;
-        animation: 2s grow-sector;
+        animation: 1s grow-sector ease-out;
+        pointer-events: none;
         .wedge {
-            border-radius: 1em;
+            border-radius: 100%;
             clip: rect(0em, .5em, 1em, 0em);
             position: absolute;
             height: 100%;
             width: 100%;
             font-family: monospace;
+            pointer-events: auto;
+            div {
+                background: $dark;
+                color: $light;
+                font-size: .5rem;
+                // position: ;
+                span {
+                    position: relative;
+                    top: 0%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 1;
+                }
+                &:hover {
+                }
+            }
         }
     }
     .legend {
@@ -49,28 +95,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        color: #FFF;
         z-index: 1;
-
-    }
-    .labels {
-        position: relative;
-        font-size: .025em;
-        top: 110%;
-        display: flex;
-        flex-direction: row;
-        margin: 1em 0;
-        padding: .5em;
-        background: $dark;
-        color: $light;
-        div {
-            margin: .5em;
-            border-top: 1em solid;
-            flex: 1;
-            span {
-                position: relative;
-            }
-        }
+        // opacity: 0;
     }
 }
 [type="bar"] {
@@ -78,20 +104,56 @@
     border-radius: .5em;
     width: 60vw;
     margin: 0 auto;
-    .bar {
+    .chart {
         box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
         position: relative;
         height: 1em;
         background: rgba($dark, .15);
-        // display: flex;
-        // flex-direction: row;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         // overflow: hidden;
-        .segment,
-        .wedge {
-            // flex: 1 0 0%;
+        .segment{
+            flex: 0 0 0%;
+            height: 100%;
+        }
+        .value {
             display: inline-block;
             height: 100%;
             width: 100%;
+        }
+    }
+}
+.chart-wrapper {
+    .labels {
+        position: relative;
+        font-size: .035em;
+        // top: 110%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 2em 0 0 0;
+        padding: .5em;
+        background: $dark;
+        div {
+            margin: .5em;
+            align-items: flex-start;
+            flex: 0 1 25%;
+            line-height: 0;
+            &:before {
+                content: '';
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                background: currentColor;
+                margin-right: .5em;
+                vertical-align: middle;
+                border-radius: .1em;
+            }
+            span {
+                color: $light;
+                position: relative;
+            }
         }
     }
 }

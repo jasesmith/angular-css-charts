@@ -1,7 +1,7 @@
-<div class="chart-wrapper" format="radial" type="donut">
+<div class="chart-wrapper" format="radial" type="pie">
     <div class="chart">
         <div ng-repeat="segment in config.segments track by $index" class="segment" style="transform: rotate({{segment._degreeStart}}deg) scale(1)">
-            <div class="wedge {{segment.class}}" ng-class="{'continued': segment._continued}" style="color:{{segment.color}};transform: rotate({{segment._degrees}}deg);">
+            <div class="wedge {{segment.class}}" title="{{segment.label}}" ng-class="{'continued': segment._continued}" style="color:{{segment.color}};transform: rotate({{segment._degrees}}deg);">
                 <!-- <div style="transform: rotate(-{{(segment._degreeStart*1) + (segment._degrees*1)}}deg)"><span>{{segment.label}}</span></div> -->
             </div>
         </div>

@@ -43,39 +43,29 @@ angular.module('app')
         };
 
         // more than 180º causes display failure
-        var _splitSector = function(segment, index, segments){
-            var newSegment = angular.copy(segment);
-            newSegment._degrees = (segment._degrees - 180).toFixed(1) * 1;
-            segment._degrees = 180;
-            segment._split = newSegment._degrees;
-            newSegment.label = segment.label + ' (cont)';
-            newSegment._continued = true;
-            segments.splice(index + 1, 0, newSegment);
-            // return;
-        };
+        var _splitSector = function(segment, split){
+            split = split || 180;
+            var array = [];
+            var times = Math.ceil(segment._degrees/split);
 
-        var _processSectorSplits = function(segments, num){
-            var l = segments.length;
-            _.each(segments, function(segment, i){
-                if(!segment._continued) { // but only for origin segments, not split-off continuations
-                    // convert segment value from n (raw number) into meaningful values
-                    segment._degrees = setDegree(segment.value, num);
-                    // in context of our charts: nº (degrees) and n% (percent)
-                    segment._percent = setPercent(segment.value, num);
-                    if(segment._degrees > 180) {
-                        _splitSector(segment, i, segments);
-                    }
+            _.times(times, function(index){
+                var newSegment = _.clone(segment);
+
+                newSegment._degrees = split;
+                newSegment._continued = false;
+                if(index > 0) {
+                    newSegment._continued = true;
+                    newSegment.label += '-' + index;
                 }
+
+                if(index + 1 === times) {
+                    newSegment._degrees = segment._degrees - (split * index);
+                }
+
+                array.push(newSegment);
             });
 
-            var lastSegment = _.last(segments);
-            if(l < segments.length && !lastSegment._continued) {
-                lastSegment._degrees = setDegree(lastSegment.value, num);
-                lastSegment._percent = setPercent(lastSegment.value, num);
-                if(lastSegment._degrees > 180) {
-                    _splitSector(lastSegment, segments.length, segments);
-                }
-            }
+            return array;
         };
 
         var processSectors = function(segments, capacity, calcs){
@@ -83,56 +73,28 @@ angular.module('app')
             calcs = calcs || getTotals(segments, capacity);
             var prev = 0;
 
-            _processSectorSplits(segments, calcs.total.num);
+            segments = _.map(segments, function(segment){
+                segment._degrees = setDegree(segment.value, calcs.total.num);
+                segment._percent = setPercent(segment.value, calcs.total.num);
 
-            _.each(segments, function(segment, i){
+                if(segment._degrees > 180) {
+                    return _splitSector(segment);
+                } else {
+                    return [segment];
+                }
+            });
+
+            segments = _.flatten(segments);
+
+            segments = _.each(segments, function(segment, i){
                 var previousSegment = _previousSector(segments, i);
 
                 prev = prev + (previousSegment ? (segment._continued ? previousSegment._degrees : previousSegment._degrees + (previousSegment._split ? previousSegment._split : 0)) : 0);
                 segment._degreeStart = prev.toFixed(1);
             });
-        };
 
-        // =================== depricated ===================
-        // var setRotation = function(segment, index, segments) {
-        //     if(segment) {
-        //         index = index || 0;
-        //
-        //         // insurance that we have a number, not a string: 10 vs. "10"
-        //         var d = segment._degrees * 1;
-        //
-        //         // determine the rotation degrees to apply to the start of each sector
-        //         // based on the accumulation of degrees for each previous sector
-        //         _.each(segments, function(s, i){
-        //             if(i < index) {
-        //                 window.console.log('loop setRotation', s.label, i, index);
-        //                 d = d + s._degrees * 1;
-        //             }
-        //         });
-        //
-        //         // default styles object to return
-        //         var styles = {
-        //             opacity: 0.95,
-        //             transform: 'rotate('+d+'deg)'
-        //         };
-        //
-        //         // if(d > 360) {
-        //         //     styles.transform = 'rotate('+d+'deg) scale(.9)';
-        //         // }
-        //
-        //         // handle overage and split segments
-        //         if(segment._overage) {
-        //             if(segment._continued) {
-        //                 styles.transform = 'rotate('+d+'deg)';
-        //             } else {
-        //                 styles.opacity = 0.5;
-        //                 styles.transform = 'rotate('+d+'deg) scale(.9)';
-        //             }
-        //         }
-        //
-        //         return styles;
-        //     }
-        // };
+            return segments;
+        };
 
         return {
             setDegree: setDegree,

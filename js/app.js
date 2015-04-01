@@ -3,8 +3,9 @@ angular.module('app', ['ui.sortable'])
 
         $scope.headline = 'CSS Charts';
         $scope.icon = 'pie-chart';
+        $scope.template = 'donut';
         $scope.chart1 = {
-            capacity: 1000,
+            capacity: 2000,
             segments: [
                 {label: 'apple', value: 210, color: '#fc1770'},
                 {label: 'tangerine', value: 158, color: '#ff7f36'},
@@ -12,7 +13,7 @@ angular.module('app', ['ui.sortable'])
                 {label: 'kiwi', value: 180, color: '#94ca3d'},
                 {label: 'sky', value: 251, color: '#15c5ec'},
                 {label: 'berry', value: 307, color: '#c657af'},
-                {label: 'plum', value: 655, color: '#7f3fa6'},
+                {label: 'plum', value: 555, color: '#7f3fa6'},
                 // {label: 'dark', value: 655, color: '#232629'},
             ]
         };
