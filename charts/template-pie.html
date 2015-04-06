@@ -6,16 +6,22 @@
             </div>
         </div>
         <div class="totals">
-            cap: {{config.capacity}}<br />
-            used: {{totals.actual.num}} / {{totals.actual.pct}}%<br />
-            over: {{totals.overage.num}} / {{totals.overage.pct}}%<br />
-            avail: {{totals.available.num}} / {{totals.available.pct}}%<br />
+            <h1>{{totals.actual.pct}}%</h1>
         </div>
         <!-- scale({{(segment._continued ? (1 - (($index-1)/36)) : (1 - ($index/36)))}}) -->
     </div>
+
     <div class="legend">
         <div ng-repeat="segment in config.segments track by $index" style="color:{{segment.color}};" ng-if="!segment._continued">
             <span>{{segment.label}}</span>
         </div>
     </div>
+
+    <div class="supplemental">
+        <div>cap: {{config.capacity}}</div>
+        <div>used: {{totals.actual.num}} / {{totals.actual.pct}}%</div>
+        <div>over: {{totals.overage.num}} / {{totals.overage.pct}}%</div>
+        <div>avail: {{totals.available.num}} / {{totals.available.pct}}%</div>
+    </div>
+
 </div>

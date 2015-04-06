@@ -1,10 +1,11 @@
 @keyframes grow-sector {
-  from {transform: rotate(0deg) scale(.7);}
+  from {transform: rotate(0deg) scale(1);}
 }
 
 .workspace {
     &.spacecat {
-        background-image: url(https://pbs.twimg.com/media/BcvmxibIYAAH8a3.jpg);
+        background-image: url(../spacecat.jpg);
+        background-size: cover;
         color: #FFF;
     }
     &:not(.spacecat) {
@@ -13,6 +14,11 @@
                 background-color: $dark;
             }
         }
+    }
+    .controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 
@@ -65,7 +71,7 @@
         width: 1em;
         height: 1em;
         border-radius: 1em;
-        overflow: hidden;
+        // overflow: hidden;
         &:after {
             border-radius: 100%;
             content: attr(title);
@@ -85,22 +91,23 @@
         position: absolute;
         height: 100%;
         width: 100%;
-        overflow: hidden;
+        // overflow: hidden;
         animation: 1s grow-sector ease-out;
         pointer-events: none;
+        &:hover {
+            z-index: 1;
+            .label {
+                opacity: .8;
+            }
+        }
         .wedge {
             border-radius: 100%;
             clip: rect(0em, .5em, 1em, 0em);
             position: absolute;
             height: 100%;
             width: 100%;
-            font-family: monospace;
+            // font-family: monospace;
             pointer-events: auto;
-            &:hover {
-                .label {
-                    opacity: .85;
-                }
-            }
         }
         .label {
             font-size: .035em;
@@ -127,31 +134,84 @@
         // opacity: 0;
     }
 }
+
+
 [type="bar"] {
-    font-size: 1rem;
     border-radius: .5em;
     width: 60vw;
-    margin: 0 auto;
     .chart {
-        box-shadow: 0 0 0 1px; //,  0 0 .05em 0 #000 inset;
-        position: relative;
         height: 1em;
         background: rgba($dark, .15);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         // overflow: hidden;
-        .segment{
-            flex: 0 0 0%;
-            height: 100%;
-        }
         .value {
-            display: inline-block;
-            height: 100%;
-            width: 100%;
         }
     }
 }
+
+[format="horizontal"] {
+    position: relative;
+    margin: 0 auto;
+    font-size: 2em;
+    .chart {
+        box-shadow: 0 0 0 .1em; //,  0 0 .05em 0 #000 inset;
+        position: relative;
+        border-radius: 1em;
+        .segment{
+            position: relative;
+            flex: 0 0 0%;
+            height: 100%;
+            &:first-of-type .value {
+                border-radius: 1em 0 0 1em;
+            }
+            &:last-of-type .value {
+                border-radius: 0 1em 1em 0;
+            }
+            &:hover {
+                z-index: 1;
+                .label {
+                    opacity: .8;
+                }
+            }
+        }
+        .value {
+            // position: relative;
+            height: 100%;
+            // width: 100%;
+        }
+        .label {
+            font-size: .5em;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 25%);
+            opacity: 0;
+            line-height: 0;
+            white-space: nowrap;
+            span {
+                background: $dark;
+                color: $light;
+                display: block;
+                padding: 1em;
+                border-radius: .3em;
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translate(-50%, 0%);
+                display: block;
+                border: .5rem solid transparent;
+                border-top-width: 0;
+                border-bottom-color: $dark;
+            }
+        }
+    }
+}
+
 .chart-wrapper {
     position: relative;
     .legend {
@@ -187,5 +247,7 @@
     }
     .supplemental {
         font-size: 1rem;
+        padding: 1em;
+        line-height: 1.4;
     }
 }

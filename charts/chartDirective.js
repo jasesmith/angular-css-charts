@@ -128,9 +128,14 @@ angular.module('app')
                 // );
             }],
 
-            templateUrl: function(element, attr){
-                return 'charts/template-' + attr.template + '.html';
-            }
+            link: function(scope, element, attrs){
+                scope.templateUrl = 'charts/template-' + attrs.template + '.html';
+                attrs.$observe('template',function(t){
+                    scope.templateUrl = 'charts/template-' + t + '.html';
+                });
+            },
+
+            template: '<div ng-include="templateUrl"></div>'
 
         };
     }]);

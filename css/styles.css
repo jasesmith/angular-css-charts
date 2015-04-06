@@ -361,12 +361,15 @@ input {
     input[type=radio]:before {
       content: '\f10c'; }
     input[type=radio]:checked:before {
-      content: '\f192'; }
+      content: '\f192';
+      color: #3CF; }
   input[type=checkbox] {
     margin-right: .2em;
     border-radius: .2em; }
     input[type=checkbox]:before {
       content: "\f00c"; }
+    input[type=checkbox]:checked:before {
+      color: #3CF; }
   input[type="range"] {
     padding: 0;
     border: 0;
@@ -557,18 +560,33 @@ section .button {
 @-webkit-keyframes grow-sector {
 
   from {
-    -webkit-transform: rotate(0deg) scale(0.7);
-            transform: rotate(0deg) scale(0.7); } }
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1); } }
 
 @keyframes grow-sector {
   from {
-    -webkit-transform: rotate(0deg) scale(0.7);
-            transform: rotate(0deg) scale(0.7); } }
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1); } }
 .workspace.spacecat {
-  background-image: url(https://pbs.twimg.com/media/BcvmxibIYAAH8a3.jpg);
+  background-image: url(../spacecat.jpg);
+  background-size: cover;
   color: #FFF; }
 .workspace:not(.spacecat) [format="radial"] .chart {
   background-color: #363639; }
+.workspace .controls {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
 
 [type="pie"] .chart {
   box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
@@ -604,8 +622,7 @@ section .button {
     position: relative;
     width: 1em;
     height: 1em;
-    border-radius: 1em;
-    overflow: hidden; }
+    border-radius: 1em; }
     [format="radial"] .chart:after {
       border-radius: 100%;
       content: attr(title);
@@ -623,20 +640,20 @@ section .button {
     position: absolute;
     height: 100%;
     width: 100%;
-    overflow: hidden;
     -webkit-animation: 1s grow-sector ease-out;
             animation: 1s grow-sector ease-out;
     pointer-events: none; }
+    [format="radial"] .segment:hover {
+      z-index: 1; }
+      [format="radial"] .segment:hover .label {
+        opacity: .8; }
     [format="radial"] .segment .wedge {
       border-radius: 100%;
       clip: rect(0em, 0.5em, 1em, 0em);
       position: absolute;
       height: 100%;
       width: 100%;
-      font-family: monospace;
       pointer-events: auto; }
-      [format="radial"] .segment .wedge:hover .label {
-        opacity: .85; }
     [format="radial"] .segment .label {
       font-size: .035em;
       position: absolute;
@@ -660,13 +677,9 @@ section .button {
     z-index: 1; }
 
 [type="bar"] {
-  font-size: 1rem;
   border-radius: .5em;
-  width: 60vw;
-  margin: 0 auto; }
+  width: 60vw; }
   [type="bar"] .chart {
-    box-shadow: 0 0 0 1px;
-    position: relative;
     height: 1em;
     background: rgba(54, 54, 57, 0.15);
     display: -webkit-box;
@@ -681,16 +694,61 @@ section .button {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
-    [type="bar"] .chart .segment {
+
+[format="horizontal"] {
+  position: relative;
+  margin: 0 auto;
+  font-size: 2em; }
+  [format="horizontal"] .chart {
+    box-shadow: 0 0 0 .1em;
+    position: relative;
+    border-radius: 1em; }
+    [format="horizontal"] .chart .segment {
+      position: relative;
       -webkit-box-flex: 0;
       -webkit-flex: 0 0 0%;
           -ms-flex: 0 0 0%;
               flex: 0 0 0%;
       height: 100%; }
-    [type="bar"] .chart .value {
-      display: inline-block;
-      height: 100%;
-      width: 100%; }
+      [format="horizontal"] .chart .segment:first-of-type .value {
+        border-radius: 1em 0 0 1em; }
+      [format="horizontal"] .chart .segment:last-of-type .value {
+        border-radius: 0 1em 1em 0; }
+      [format="horizontal"] .chart .segment:hover {
+        z-index: 1; }
+        [format="horizontal"] .chart .segment:hover .label {
+          opacity: .8; }
+    [format="horizontal"] .chart .value {
+      height: 100%; }
+    [format="horizontal"] .chart .label {
+      font-size: .5em;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 25%);
+          -ms-transform: translate(-50%, 25%);
+              transform: translate(-50%, 25%);
+      opacity: 0;
+      line-height: 0;
+      white-space: nowrap; }
+      [format="horizontal"] .chart .label span {
+        background: #363639;
+        color: #FFF;
+        display: block;
+        padding: 1em;
+        border-radius: .3em; }
+      [format="horizontal"] .chart .label:after {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0%);
+            -ms-transform: translate(-50%, 0%);
+                transform: translate(-50%, 0%);
+        display: block;
+        border: .5rem solid transparent;
+        border-top-width: 0;
+        border-bottom-color: #363639; }
 
 .chart-wrapper {
   position: relative; }
@@ -736,4 +794,6 @@ section .button {
         color: #FFF;
         position: relative; }
   .chart-wrapper .supplemental {
-    font-size: 1rem; }
+    font-size: 1rem;
+    padding: 1em;
+    line-height: 1.4; }

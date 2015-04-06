@@ -48,6 +48,7 @@ input {
         }
         &:checked:before {
             content: '\f192';
+            color: $active;
         }
     }
 
@@ -57,6 +58,9 @@ input {
         border-radius: .2em;
         &:before {
             content: "\f00c"; // check
+        }
+        &:checked:before {
+            color: $active;
         }
     }
     &[type="range"] {

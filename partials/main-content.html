@@ -1,10 +1,12 @@
 <div class="controls">
-    <!-- <label><input type="checkbox" ng-model="spacecat" value="true" /> SpaceCat</label> -->
-    <!-- <div>
+    <div>
         <label><input type="radio" ng-model="template" value="donut" /> Donut</label><br />
         <label><input type="radio" ng-model="template" value="pie" /> Pie</label><br />
         <label><input type="radio" ng-model="template" value="bar" /> Bar</label>
-    </div> -->
+    </div>
+    <div>
+        <label><input type="checkbox" class="toggle" ng-model="$parent.spacecat" /> SpaceCat</label>
+    </div>
 
     <!-- <label ng-repeat="segment in chart1.segments">
         <input type="range" ng-model="chart1.segments[$index].value" min="0" max="{{chart1.capacity}}" /> {{segment.value}}
@@ -22,8 +24,5 @@
     <button ng-click="addSector()">new sector</button> -->
 </div>
 
-<chart config="chart1" template="donut" xng-if="template == 'donut'"></chart>
-<!-- <chart config="chart1" template="pie" xng-if="template == 'pie'"></chart> -->
-<!-- <chart config="chart1" template="bar" xng-if="template == 'bar'"></chart> -->
-
+<chart config="chart1" template="{{template}}"></chart>
 <!-- <pre style="font-size: 1rem;">{{chart1.segments | json}}</pre> -->

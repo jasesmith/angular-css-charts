@@ -22,7 +22,7 @@
 
             </header>
 
-            <div class="workspace xspacecat">
+            <div class="workspace" ng-class="{'spacecat': spacecat}">
 
                 <main class="main" ng-include="'partials/main-content.html'"></main>
 
@@ -41,6 +41,5 @@
     <script src="js/app.js"></script>
     <script src="js/utilities.js"></script>
     <script src="js/factories/storage.js"></script>
-    <script src="js/factories/sectors.js"></script>
     <script src="charts/chartDirective.js"></script>
 </html>
