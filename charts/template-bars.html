@@ -1,10 +1,10 @@
-<div class="chart-wrapper" format="horizontal" type="bar">
-    <div class="totals">
+<div class="chart-wrapper" format="horizontal" type="bars">
+    <!-- <div class="totals">
         <h1>{{totals.actual.pct}}%</h1>
-    </div>
+    </div> -->
 
     <div class="chart">
-        <div ng-repeat="segment in config.segments track by $index | filter:!segment._continued" class="segment" data-title="{{segment.label}}" style="flex-basis: {{segment._percent}}%">
+        <div ng-repeat="segment in config.segments track by $index | filter:!segment._continued" class="segment" data-title="{{segment.label}}" style="height: {{segment._percent}}%">
             <div class="value {{segment.class}}" style="background:{{segment.color}};">
                 <div class="label"><span>{{segment.label}}: {{segment._percent}}%</span></div>
             </div>

@@ -588,38 +588,12 @@ section .button {
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
-[type="pie"] .chart {
-  box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
-  background-color: rgba(54, 54, 57, 0.35);
-  background-size: 0.05em 0.05em;
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
-  [type="pie"] .chart:after {
-    background-color: rgba(54, 54, 57, 0.35); }
-[type="pie"] .totals {
-  color: #FFF; }
-[type="pie"] .segment .wedge {
-  background: currentColor; }
-
-[type="donut"] .chart {
-  box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
-  background-color: rgba(54, 54, 57, 0.35);
-  background-size: 0.05em 0.05em;
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
-[type="donut"] .totals {
-  color: #FFF; }
-[type="donut"] .segment .wedge {
-  border: .1em solid currentColor; }
-
 [format="radial"] {
-  position: relative;
   margin: 0 auto;
   font-size: 50vw;
   width: 1em;
   height: 1em; }
   [format="radial"] .chart {
-    position: relative;
     width: 1em;
     height: 1em;
     border-radius: 1em; }
@@ -676,10 +650,77 @@ section .button {
             transform: translate(-50%, -50%);
     z-index: 1; }
 
-[type="bar"] {
+[type="pie"] .chart {
+  box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
+  background-color: rgba(54, 54, 57, 0.35);
+  background-size: 0.05em 0.05em;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
+  [type="pie"] .chart:after {
+    background-color: rgba(54, 54, 57, 0.35); }
+[type="pie"] .totals {
+  color: #FFF; }
+[type="pie"] .segment .wedge {
+  background: currentColor; }
+
+[type="donut"] .chart {
+  box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
+  background-color: rgba(54, 54, 57, 0.35);
+  background-size: 0.05em 0.05em;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
+[type="donut"] .totals {
+  color: #FFF; }
+[type="donut"] .segment .wedge {
+  border: .1em solid currentColor; }
+
+[format="horizontal"] {
+  margin: 0 auto; }
+  [format="horizontal"] .chart .segment {
+    position: relative; }
+    [format="horizontal"] .chart .segment:hover {
+      z-index: 1; }
+      [format="horizontal"] .chart .segment:hover .label {
+        opacity: .8; }
+  [format="horizontal"] .chart .value {
+    width: 100%;
+    height: 100%; }
+  [format="horizontal"] .chart .label {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 25%);
+        -ms-transform: translate(-50%, 25%);
+            transform: translate(-50%, 25%);
+    opacity: 0;
+    line-height: 0;
+    white-space: nowrap; }
+    [format="horizontal"] .chart .label span {
+      background: #363639;
+      color: #FFF;
+      display: block;
+      padding: 1em;
+      border-radius: .3em; }
+    [format="horizontal"] .chart .label:after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      -webkit-transform: translate(-50%, 0%);
+          -ms-transform: translate(-50%, 0%);
+              transform: translate(-50%, 0%);
+      display: block;
+      border: .5rem solid transparent;
+      border-top-width: 0;
+      border-bottom-color: #363639; }
+
+[type="stacked"] {
   border-radius: .5em;
-  width: 60vw; }
-  [type="bar"] .chart {
+  width: 60vw;
+  font-size: 2em; }
+  [type="stacked"] .chart {
+    box-shadow: 0 0 0 .1em;
+    border-radius: 1em;
     height: 1em;
     background: rgba(54, 54, 57, 0.15);
     display: -webkit-box;
@@ -694,61 +735,56 @@ section .button {
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap; }
-
-[format="horizontal"] {
-  position: relative;
-  margin: 0 auto;
-  font-size: 2em; }
-  [format="horizontal"] .chart {
-    box-shadow: 0 0 0 .1em;
-    position: relative;
-    border-radius: 1em; }
-    [format="horizontal"] .chart .segment {
-      position: relative;
+    [type="stacked"] .chart .segment {
       -webkit-box-flex: 0;
       -webkit-flex: 0 0 0%;
           -ms-flex: 0 0 0%;
               flex: 0 0 0%;
-      height: 100%; }
-      [format="horizontal"] .chart .segment:first-of-type .value {
+      height: 1em; }
+      [type="stacked"] .chart .segment:first-of-type .value {
         border-radius: 1em 0 0 1em; }
-      [format="horizontal"] .chart .segment:last-of-type .value {
+      [type="stacked"] .chart .segment:last-of-type .value {
         border-radius: 0 1em 1em 0; }
-      [format="horizontal"] .chart .segment:hover {
-        z-index: 1; }
-        [format="horizontal"] .chart .segment:hover .label {
-          opacity: .8; }
-    [format="horizontal"] .chart .value {
-      height: 100%; }
-    [format="horizontal"] .chart .label {
-      font-size: .5em;
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      -webkit-transform: translate(-50%, 25%);
-          -ms-transform: translate(-50%, 25%);
-              transform: translate(-50%, 25%);
-      opacity: 0;
-      line-height: 0;
-      white-space: nowrap; }
-      [format="horizontal"] .chart .label span {
-        background: #363639;
-        color: #FFF;
-        display: block;
-        padding: 1em;
-        border-radius: .3em; }
-      [format="horizontal"] .chart .label:after {
-        content: '';
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        -webkit-transform: translate(-50%, 0%);
-            -ms-transform: translate(-50%, 0%);
-                transform: translate(-50%, 0%);
-        display: block;
-        border: .5rem solid transparent;
-        border-top-width: 0;
-        border-bottom-color: #363639; }
+    [type="stacked"] .chart .label {
+      font-size: .5em; }
+
+[type="bars"] {
+  border-radius: .5em;
+  width: 1em;
+  height: 1em;
+  font-size: 30vw; }
+  [type="bars"] .chart {
+    height: 1em;
+    border-radius: .01em;
+    box-shadow: 0 0 0 .03em;
+    background: rgba(54, 54, 57, 0.15);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between; }
+    [type="bars"] .chart .segment {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 0 auto;
+          -ms-flex: 1 0 auto;
+              flex: 1 0 auto;
+      width: .1em; }
+    [type="bars"] .chart .value {
+      border-radius: 1em 1em 0 0; }
+    [type="bars"] .chart .label {
+      font-size: .5rem; }
 
 .chart-wrapper {
   position: relative; }
