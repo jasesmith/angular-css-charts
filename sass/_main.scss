@@ -1,5 +1,13 @@
-@keyframes grow-sector {
+@keyframes roll-sector {
   from {transform: rotate(0deg) scale(1);}
+}
+
+@keyframes grow-sector {
+  from {flex-basis: 0%;}
+}
+
+@keyframes raise-sector {
+  from {height: 0;}
 }
 
 .workspace {
@@ -52,7 +60,7 @@
         height: 100%;
         width: 100%;
         // overflow: hidden;
-        animation: 1s grow-sector ease-out;
+        animation: 1s roll-sector ease-out;
         pointer-events: none;
         &:hover {
             z-index: 1;
@@ -196,6 +204,7 @@
         .segment {
             flex: 0 0 0%;
             height: 1em;
+            animation: 1s grow-sector ease-out;
             &:first-of-type .value {
                 border-radius: 1em 0 0 1em;
             }
@@ -228,6 +237,7 @@
         .segment {
             flex: 1 0 auto;
             width: .1em;
+            animation: 1s raise-sector ease-out;
         }
         .value {
             border-radius: 1em 1em 0 0;

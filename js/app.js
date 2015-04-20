@@ -1,4 +1,4 @@
-angular.module('app', ['ui.sortable'])
+angular.module('app', ['handy-dandies'])
     .controller('AppController', ['$scope', function($scope) {
 
         $scope.headline = 'CSS Charts';
@@ -17,19 +17,6 @@ angular.module('app', ['ui.sortable'])
                 {label: 'plum', value: 555, color: '#7f3fa6'},
                 // {label: 'dark', value: 655, color: '#232629'},
             ]
-        };
-
-        $scope.dragControlListeners = {
-            accept: function () {
-                return true; //override to determine drag is allowed or not. default is true.
-            },
-            dragEnd: function(item){
-                if(item.source.index !== item.dest.index) {
-                    var navs = angular.copy($scope.navs);
-                    navs.move(navs[item.source.index], navs[item.dest.index]);
-                }
-            },
-            containment: '.omni-nav-grid'
         };
 
     }]);

@@ -557,16 +557,33 @@ section .button {
 .as-sortable-hidden {
   display: none !important; }
 
+@-webkit-keyframes roll-sector {
+
+  from {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1); } }
+
+@keyframes roll-sector {
+  from {
+    -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1); } }
 @-webkit-keyframes grow-sector {
 
   from {
-    -webkit-transform: rotate(0deg) scale(1);
-            transform: rotate(0deg) scale(1); } }
-
+    -webkit-flex-basis: 0%;
+            flex-basis: 0%; } }
 @keyframes grow-sector {
   from {
-    -webkit-transform: rotate(0deg) scale(1);
-            transform: rotate(0deg) scale(1); } }
+    -webkit-flex-basis: 0%;
+        -ms-flex-preferred-size: 0%;
+            flex-basis: 0%; } }
+@-webkit-keyframes raise-sector {
+
+  from {
+    height: 0; } }
+@keyframes raise-sector {
+  from {
+    height: 0; } }
 .workspace.spacecat {
   background-image: url(../spacecat.jpg);
   background-size: cover;
@@ -614,8 +631,8 @@ section .button {
     position: absolute;
     height: 100%;
     width: 100%;
-    -webkit-animation: 1s grow-sector ease-out;
-            animation: 1s grow-sector ease-out;
+    -webkit-animation: 1s roll-sector ease-out;
+            animation: 1s roll-sector ease-out;
     pointer-events: none; }
     [format="radial"] .segment:hover {
       z-index: 1; }
@@ -740,7 +757,9 @@ section .button {
       -webkit-flex: 0 0 0%;
           -ms-flex: 0 0 0%;
               flex: 0 0 0%;
-      height: 1em; }
+      height: 1em;
+      -webkit-animation: 1s grow-sector ease-out;
+              animation: 1s grow-sector ease-out; }
       [type="stacked"] .chart .segment:first-of-type .value {
         border-radius: 1em 0 0 1em; }
       [type="stacked"] .chart .segment:last-of-type .value {
@@ -780,7 +799,9 @@ section .button {
       -webkit-flex: 1 0 auto;
           -ms-flex: 1 0 auto;
               flex: 1 0 auto;
-      width: .1em; }
+      width: .1em;
+      -webkit-animation: 1s raise-sector ease-out;
+              animation: 1s raise-sector ease-out; }
     [type="bars"] .chart .value {
       border-radius: 1em 1em 0 0; }
     [type="bars"] .chart .label {
