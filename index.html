@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppController">
+    <head>
+        <title>{{headline}}</title>
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" media="screen" charset="utf-8" />
+        <link rel="stylesheet" href="css/styles.css" media="screen" title="no title" charset="utf-8" />
+    </head>
+    <body class="">
+
+        <div class="wrapper" ng-cloak>
+
+            <header class="" ng-if="headline">
+
+                <div class="mark">
+                    <i class="fa fa-{{icon}}" ng-if="icon"></i>
+                    {{headline}}
+                </div>
+
+            </header>
+
+            <div class="workspace" ng-class="{'spacecat': spacecat}">
+
+                <main class="main">
+                    <div class="controls">
+                        <div>
+                            <label><input type="radio" ng-model="template" value="donut" /> Donut</label><br />
+                            <label><input type="radio" ng-model="template" value="pie" /> Pie</label><br />
+                            <label><input type="radio" ng-model="template" value="bars" /> Bars</label><br />
+                            <label><input type="radio" ng-model="template" value="stacked" /> Stacked Bar</label>
+                        </div>
+                        <div>
+                            <label><input type="checkbox" class="toggle" ng-model="$parent.spacecat" /> SpaceCat</label>
+                        </div>
+
+                        <!-- <label ng-repeat="segment in chart1.segments">
+                            <input type="range" ng-model="chart1.segments[$index].value" min="0" max="{{chart1.capacity}}" /> {{segment.value}}
+                        </label> -->
+                        <!-- <div>
+                            Capacity: <input type="number" min="1" value="{{chart1.capacity}}" />
+                            <div ng-repeat="segment in chart1.segments track by $index">
+                                <label>
+                                    {{segment.label}}
+                                    <input type="range" value="{{segment.value}}" ng-model="segment.value" min="0" max="{{chart1.capacity}}" />
+                                    {{segment.value}} <span ng-click="removeSector($index)">[&times;]</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button ng-click="addSector()">new sector</button> -->
+                    </div>
+
+                    <chart config="chart1" template="{{template}}"></chart>
+                    <!-- <pre style="font-size: 1rem;">{{chart1.segments | json}}</pre> -->
+                </main>
+
+            </div>
+        </div>
+
+    </body>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/jquery.scrollTo/jquery.scrollTo.min.js"></script>
+    <script src="bower_components/angular-handy-dandies/handy-dandies.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/factories/storage.js"></script>
+    <script src="charts/chartDirective.js"></script>
+</html>
