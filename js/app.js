@@ -1,4 +1,4 @@
-angular.module('app', ['handy-dandies'])
+angular.module('app', ['jamfu'])
     .controller('AppController', ['$scope', function($scope) {
 
         $scope.headline = 'CSS Charts';
