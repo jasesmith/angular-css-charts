@@ -10,40 +10,18 @@
   from {height: 0;}
 }
 
-.workspace {
-    &.spacecat {
-        background-image: url(../spacecat.jpg);
-        background-size: cover;
-        color: #FFF;
-    }
-    &:not(.spacecat) {
-        [format="radial"] {
-            .chart {
-                background-color: $dark;
-            }
-        }
-    }
-    .controls {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-
 [format="radial"] {
     margin: 0 auto;
-    font-size: 50vw;
+    font-size: inherit;
     width: 1em;
     height: 1em;
     .chart {
         width: 1em;
         height: 1em;
         border-radius: 1em;
-        // overflow: hidden;
         &:after {
             border-radius: 100%;
             content: attr(title);
-            // box-shadow: 0 0 .2em 0 #000 inset;
             width: 70%;
             height: 70%;
             position: absolute;
@@ -51,16 +29,16 @@
             left: 50%;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            // opacity: 0; //.15;
         }
+    }
+    &.animate .segment {
+        animation: 1s roll-sector ease-out;
     }
     .segment {
         clip: rect(0em, 1em, 1em, .5em);
         position: absolute;
         height: 100%;
         width: 100%;
-        // overflow: hidden;
-        animation: 1s roll-sector ease-out;
         pointer-events: none;
         &:hover {
             z-index: 1;
@@ -74,7 +52,6 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            // font-family: monospace;
             pointer-events: auto;
         }
         .label {
@@ -99,15 +76,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1;
-        // opacity: 0;
     }
 }
 
 [type="pie"] {
     .chart {
-        box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
-        background-color: rgba($dark, .35);
-        @include background-stripes(0.1, 45deg, 0.05em);
+        // box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
+        // background-color: rgba($dark, .35);
+        // @include background-stripes(0.1, 45deg, 0.05em);
         &:after {
             background-color: rgba($dark, .35);
         }
@@ -123,11 +99,11 @@
 }
 
 [type="donut"] {
-    .chart {
-        box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
-        background-color: rgba($dark, .35);
-        @include background-stripes(0.1, 45deg, 0.05em);
-    }
+    // .chart {
+    //     box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
+    //     background-color: rgba($dark, .35);
+    //     @include background-stripes(0.1, 45deg, 0.05em);
+    // }
     .totals {
         color: #FFF;
     }
@@ -135,13 +111,12 @@
         .wedge {
             border: .1em solid currentColor;
             &.continued {
-                // border-left: .03em solid;
             }
         }
     }
 }
 
-[format="horizontal"] {
+[format="block"] {
     margin: 0 auto;
     .chart {
         .segment{
@@ -154,9 +129,9 @@
             }
         }
         .value {
-            // position: relative;
             width: 100%;
             height: 100%;
+            background-color: currentColor;
         }
         .label {
             position: absolute;
@@ -190,26 +165,27 @@
 
 [type="stacked"] {
     border-radius: .5em;
-    width: 60vw;
-    font-size: 2em;
+    width: 50%;
+    font-size: inherit;
     .chart {
-        box-shadow: 0 0 0 .1em; //,  0 0 .05em 0 #000 inset;
+        // box-shadow: 0 0 0 .1em;
         border-radius: 1em;
         height: 1em;
-        background: rgba($dark, .15);
+        // background: rgba($dark, .15);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        // overflow: hidden;
         .segment {
             flex: 0 0 0%;
             height: 1em;
-            animation: 1s grow-sector ease-out;
             &:first-of-type .value {
                 border-radius: 1em 0 0 1em;
             }
             &:last-of-type .value {
                 border-radius: 0 1em 1em 0;
+            }
+            &:only-of-type .value {
+                border-radius: 1em;
             }
         }
         .value {
@@ -218,17 +194,20 @@
             font-size: .5em;
         }
     }
+    &.animate .segment {
+        animation: 1s grow-sector ease-out;
+    }
 }
 
 [type="bars"] {
     border-radius: .5em;
     width: 1em;
     height: 1em;
-    font-size: 30vw;
+    font-size: inherit;
     .chart {
         height: 1em;
         border-radius: .01em;
-        box-shadow: 0 0 0 .03em; //,  0 0 .05em 0 #000 inset;
+        box-shadow: 0 0 0 .03em;
         background: rgba($dark, .15);
         display: flex;
         flex-direction: row;
@@ -237,7 +216,9 @@
         .segment {
             flex: 1 0 auto;
             width: .1em;
-            animation: 1s raise-sector ease-out;
+            &[percent="100"] .value {
+                border-radius: 0;
+            }
         }
         .value {
             border-radius: 1em 1em 0 0;
@@ -246,24 +227,33 @@
             font-size: .5rem;
         }
     }
+    &.animate .segment {
+        animation: 1s raise-sector ease-out;
+    }
 }
 
 .chart-wrapper {
     position: relative;
+    display: block;
+    .chart {
+        box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
+        background-color: $dark; //rgba($dark, .35);
+        @include background-stripes(0.1, 45deg, 0.05em);
+    }
     .legend {
         position: relative;
-        font-size: .04em;
-        // top: 110%;
+        font-size: 5%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         margin: 2em 0 0 0;
         padding: .5em;
         background: $dark;
+        border-radius: .5em;
         div {
             margin: .5em;
             align-items: flex-start;
-            flex: 0 1 25%;
+            flex: 1 1 auto;
             line-height: 0;
             &:before {
                 content: '';

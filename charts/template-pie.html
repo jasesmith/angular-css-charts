@@ -1,27 +1,5 @@
-<div class="chart-wrapper" format="radial" type="pie">
-    <div class="chart">
-        <div ng-repeat="segment in config.segments track by $index" class="segment" style="transform: rotate({{segment._degreeStart}}deg) scale(1)">
-            <div class="wedge {{segment.class}}" title="{{segment.label}}" ng-class="{'continued': segment._continued}" style="color:{{segment.color}};transform: rotate({{segment._degrees}}deg);">
-                <div class="label" style="transform: rotate(-{{(segment._degreeStart*1) + (segment._degrees*1)}}deg)"><span>{{segment.label}}</span></div>
-            </div>
-        </div>
-        <div class="totals">
-            <h1>{{totals.actual.pct}}%</h1>
-        </div>
-        <!-- scale({{(segment._continued ? (1 - (($index-1)/36)) : (1 - ($index/36)))}}) -->
+<div class="chart" css-chart-object>
+    <div class="totals">
+        <h1>{{totals.actual.pct | number: config.preferences.precision}}%</h1>
     </div>
-
-    <div class="legend">
-        <div ng-repeat="segment in config.segments track by $index" style="color:{{segment.color}};" ng-if="!segment._continued">
-            <span>{{segment.label}}</span>
-        </div>
-    </div>
-
-    <div class="supplemental">
-        <div>cap: {{config.capacity}}</div>
-        <div>used: {{totals.actual.num}} / {{totals.actual.pct}}%</div>
-        <div>over: {{totals.overage.num}} / {{totals.overage.pct}}%</div>
-        <div>avail: {{totals.available.num}} / {{totals.available.pct}}%</div>
-    </div>
-
 </div>

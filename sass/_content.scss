@@ -1,0 +1,19 @@
+.workspace {
+    &.spacecat {
+        background-image: url(../spacecat.jpg);
+        background-size: cover;
+        color: #FFF;
+    }
+    &:not(.spacecat) {
+        // [format="radial"] {
+        //     .chart {
+        //         background-color: $dark;
+        //     }
+        // }
+    }
+    .controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

@@ -42,7 +42,49 @@ html, body, .wrapper {
         flex-grow: 2;
         flex-shrink: 1;
         flex-basis: 100%;
-        padding: $gutter;
+        // padding: $gutter;
         z-index: 1;
+        display: flex;
+        flex-direction: row;
+    }
+    .visual {
+        flex: 1 0 auto;
+    }
+    .canvas {
+        flex: 1;
+        padding: $gutter;
+    }
+    .settings {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 auto;
+        background: $dark;
+        padding: $gutter;
+        color: $light;
+    }
+}
+
+.separator {
+    // border: 0;
+    background: currentColor;
+    height: 2px;
+    display: block;
+    margin: 1em 0;
+    opacity: .5;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    padding: .5em 0;
+    > * {
+        flex: 1;
+        margin: 0 5em;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }

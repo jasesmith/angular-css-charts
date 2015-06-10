@@ -1,0 +1,19 @@
+<div class="chart" css-chart-object>
+    <div class="totals">
+        <h1>{{totals.actual.pct | number: config.preferences.precision}}%</h1>
+    </div>
+    <!-- scale({{(segment._continued ? (1 - (($index-1)/36)) : (1 - ($index/36)))}}) -->
+</div>
+
+<div class="legend">
+    <div ng-repeat="segment in segments track by $index" class="{{segment.class}}" ng-style="{'color': (segment.class ? '' : segment.color)}" ng-if="!segment._continued">
+        <span>{{segment.label}} <small class="subtext">({{segment._percent | number: config.preferences.precision}}%)</small></span>
+    </div>
+</div>
+
+<div class="supplemental">
+    <div>cap: {{capacity}}</div>
+    <div>used: {{totals.actual.num | number: config.preferences.precision}} / {{totals.actual.pct | number: config.preferences.precision}}%</div>
+    <div>over: {{totals.overage.num | number: config.preferences.precision}} / {{totals.overage.pct | number: config.preferences.precision}}%</div>
+    <div>avail: {{totals.available.num | number: config.preferences.precision}} / {{totals.available.pct | number: config.preferences.precision}}%</div>
+</div>
