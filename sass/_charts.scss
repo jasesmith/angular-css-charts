@@ -10,8 +10,19 @@
   from {height: 0;}
 }
 
-[format="radial"] {
+.chart-wrapper {
+    position: relative;
+    display: block;
     margin: 0 auto;
+    .chart {
+        box-shadow: 0 0 0 .25rem;
+        .label {
+            font-size: .03em;
+        }
+    }
+}
+
+[format="radial"] {
     font-size: inherit;
     width: 1em;
     height: 1em;
@@ -19,20 +30,24 @@
         width: 1em;
         height: 1em;
         border-radius: 1em;
-        &:after {
-            border-radius: 100%;
-            content: attr(title);
-            width: 70%;
-            height: 70%;
+        .label {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
+            top: 0%;
+            left: 30%;
+            span {
+                position: absolute;
+                padding: .5em;
+                border-radius: .3em;
+            }
         }
     }
-    &.animate .segment {
-        animation: 1s roll-sector ease-out;
+    .totals {
+        font-size: .05em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
     }
     .segment {
         clip: rect(0em, 1em, 1em, .5em);
@@ -54,43 +69,13 @@
             width: 100%;
             pointer-events: auto;
         }
-        .label {
-            font-size: .035em;
-            position: absolute;
-            top: 0%;
-            left: 30%;
-            opacity: 0;
-            span {
-                background: $dark;
-                color: $light;
-                position: absolute;
-                padding: .5em;
-                border-radius: .3em;
-            }
-        }
     }
-    .totals {
-        font-size: .05em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
+    &.animate .segment {
+        animation: 1s roll-sector ease-out;
     }
 }
 
 [type="pie"] {
-    .chart {
-        // box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
-        // background-color: rgba($dark, .35);
-        // @include background-stripes(0.1, 45deg, 0.05em);
-        &:after {
-            background-color: rgba($dark, .35);
-        }
-    }
-    .totals {
-        color: #FFF;
-    }
     .segment {
         .wedge {
             background: currentColor;
@@ -99,39 +84,21 @@
 }
 
 [type="donut"] {
-    // .chart {
-    //     box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
-    //     background-color: rgba($dark, .35);
-    //     @include background-stripes(0.1, 45deg, 0.05em);
-    // }
-    .totals {
-        color: #FFF;
-    }
     .segment {
         .wedge {
             border: .1em solid currentColor;
-            &.continued {
-            }
         }
     }
 }
 
 [format="block"] {
-    margin: 0 auto;
-    .chart {
-        .segment{
-            position: relative;
-            &:hover {
-                z-index: 1;
-                .label {
-                    opacity: .8;
-                }
+    .segment{
+        position: relative;
+        &:hover {
+            z-index: 1;
+            .label {
+                opacity: .8;
             }
-        }
-        .value {
-            width: 100%;
-            height: 100%;
-            background-color: currentColor;
         }
         .label {
             position: absolute;
@@ -141,9 +108,9 @@
             opacity: 0;
             line-height: 0;
             white-space: nowrap;
+            margin-top: .5rem;
+            font-size: .8rem;
             span {
-                background: $dark;
-                color: $light;
                 display: block;
                 padding: 1em;
                 border-radius: .3em;
@@ -157,9 +124,13 @@
                 display: block;
                 border: .5rem solid transparent;
                 border-top-width: 0;
-                border-bottom-color: $dark;
             }
         }
+    }
+    .value {
+        width: 100%;
+        height: 100%;
+        background-color: currentColor;
     }
 }
 
@@ -168,30 +139,13 @@
     width: 50%;
     font-size: inherit;
     .chart {
-        // box-shadow: 0 0 0 .1em;
-        border-radius: 1em;
-        height: 1em;
-        // background: rgba($dark, .15);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        height: 1em;
         .segment {
             flex: 0 0 0%;
-            height: 1em;
-            &:first-of-type .value {
-                border-radius: 1em 0 0 1em;
-            }
-            &:last-of-type .value {
-                border-radius: 0 1em 1em 0;
-            }
-            &:only-of-type .value {
-                border-radius: 1em;
-            }
-        }
-        .value {
-        }
-        .label {
-            font-size: .5em;
+            height: 100%;
         }
     }
     &.animate .segment {
@@ -200,80 +154,25 @@
 }
 
 [type="bars"] {
-    border-radius: .5em;
     width: 1em;
     height: 1em;
     font-size: inherit;
     .chart {
         height: 1em;
-        border-radius: .01em;
-        box-shadow: 0 0 0 .03em;
-        background: rgba($dark, .15);
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         justify-content: space-between;
         .segment {
-            flex: 1 0 auto;
+            flex: 1 1 auto;
             width: .1em;
+            margin: 0 .3rem;
             &[percent="100"] .value {
                 border-radius: 0;
             }
         }
-        .value {
-            border-radius: 1em 1em 0 0;
-        }
-        .label {
-            font-size: .5rem;
-        }
     }
     &.animate .segment {
         animation: 1s raise-sector ease-out;
-    }
-}
-
-.chart-wrapper {
-    position: relative;
-    display: block;
-    .chart {
-        box-shadow: 0 0 .3em 0 #000 inset, 0 0 0 .025em, 0 .1em .2em 0 rgba(#000, .35);
-        background-color: $dark; //rgba($dark, .35);
-        @include background-stripes(0.1, 45deg, 0.05em);
-    }
-    .legend {
-        position: relative;
-        font-size: 5%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin: 2em 0 0 0;
-        padding: .5em;
-        background: $dark;
-        border-radius: .5em;
-        div {
-            margin: .5em;
-            align-items: flex-start;
-            flex: 1 1 auto;
-            line-height: 0;
-            &:before {
-                content: '';
-                display: inline-block;
-                width: 1em;
-                height: 1em;
-                background: currentColor;
-                margin-right: .5em;
-                vertical-align: middle;
-                border-radius: .1em;
-            }
-            span {
-                color: $light;
-                position: relative;
-            }
-        }
-    }
-    .supplemental {
-        font-size: 1rem;
-        padding: 1em;
-        line-height: 1.4;
     }
 }

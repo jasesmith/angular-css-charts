@@ -343,7 +343,13 @@ html, body, .wrapper {
             flex: 0 1 auto;
     background: #363639;
     padding: 2rem;
-    color: #FFF; }
+    color: #FFF;
+    overflow: auto; }
+    .workspace .settings > * {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+          -ms-flex: 0 0 auto;
+              flex: 0 0 auto; }
 
 .separator {
   background: currentColor;
@@ -646,8 +652,16 @@ section .button {
 @keyframes raise-sector {
   from {
     height: 0; } }
+.chart-wrapper {
+  position: relative;
+  display: block;
+  margin: 0 auto; }
+  .chart-wrapper .chart {
+    box-shadow: 0 0 0 .25rem; }
+    .chart-wrapper .chart .label {
+      font-size: .03em; }
+
 [format="radial"] {
-  margin: 0 auto;
   font-size: inherit;
   width: 1em;
   height: 1em; }
@@ -655,21 +669,23 @@ section .button {
     width: 1em;
     height: 1em;
     border-radius: 1em; }
-    [format="radial"] .chart:after {
-      border-radius: 100%;
-      content: attr(title);
-      width: 70%;
-      height: 70%;
+    [format="radial"] .chart .label {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-          -ms-transform: translate(-50%, -50%);
-              transform: translate(-50%, -50%);
-      pointer-events: none; }
-  [format="radial"].animate .segment {
-    -webkit-animation: 1s roll-sector ease-out;
-            animation: 1s roll-sector ease-out; }
+      top: 0%;
+      left: 30%; }
+      [format="radial"] .chart .label span {
+        position: absolute;
+        padding: .5em;
+        border-radius: .3em; }
+  [format="radial"] .totals {
+    font-size: .05em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    z-index: 2; }
   [format="radial"] .segment {
     clip: rect(0em, 1em, 1em, 0.5em);
     position: absolute;
@@ -687,53 +703,23 @@ section .button {
       height: 100%;
       width: 100%;
       pointer-events: auto; }
-    [format="radial"] .segment .label {
-      font-size: .035em;
-      position: absolute;
-      top: 0%;
-      left: 30%;
-      opacity: 0; }
-      [format="radial"] .segment .label span {
-        background: #363639;
-        color: #FFF;
-        position: absolute;
-        padding: .5em;
-        border-radius: .3em; }
-  [format="radial"] .totals {
-    font-size: .05em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-    z-index: 1; }
+  [format="radial"].animate .segment {
+    -webkit-animation: 1s roll-sector ease-out;
+            animation: 1s roll-sector ease-out; }
 
-[type="pie"] .chart:after {
-  background-color: rgba(54, 54, 57, 0.35); }
-[type="pie"] .totals {
-  color: #FFF; }
 [type="pie"] .segment .wedge {
   background: currentColor; }
 
-[type="donut"] .totals {
-  color: #FFF; }
 [type="donut"] .segment .wedge {
   border: .1em solid currentColor; }
 
-[format="block"] {
-  margin: 0 auto; }
-  [format="block"] .chart .segment {
-    position: relative; }
-    [format="block"] .chart .segment:hover {
-      z-index: 1; }
-      [format="block"] .chart .segment:hover .label {
-        opacity: .8; }
-  [format="block"] .chart .value {
-    width: 100%;
-    height: 100%;
-    background-color: currentColor; }
-  [format="block"] .chart .label {
+[format="block"] .segment {
+  position: relative; }
+  [format="block"] .segment:hover {
+    z-index: 1; }
+    [format="block"] .segment:hover .label {
+      opacity: .8; }
+  [format="block"] .segment .label {
     position: absolute;
     top: 100%;
     left: 50%;
@@ -742,14 +728,14 @@ section .button {
             transform: translate(-50%, 25%);
     opacity: 0;
     line-height: 0;
-    white-space: nowrap; }
-    [format="block"] .chart .label span {
-      background: #363639;
-      color: #FFF;
+    white-space: nowrap;
+    margin-top: .5rem;
+    font-size: .8rem; }
+    [format="block"] .segment .label span {
       display: block;
       padding: 1em;
       border-radius: .3em; }
-    [format="block"] .chart .label:after {
+    [format="block"] .segment .label:after {
       content: '';
       position: absolute;
       bottom: 100%;
@@ -759,16 +745,17 @@ section .button {
               transform: translate(-50%, 0%);
       display: block;
       border: .5rem solid transparent;
-      border-top-width: 0;
-      border-bottom-color: #363639; }
+      border-top-width: 0; }
+[format="block"] .value {
+  width: 100%;
+  height: 100%;
+  background-color: currentColor; }
 
 [type="stacked"] {
   border-radius: .5em;
   width: 50%;
   font-size: inherit; }
   [type="stacked"] .chart {
-    border-radius: 1em;
-    height: 1em;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -780,35 +767,24 @@ section .button {
             flex-direction: row;
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap; }
+            flex-wrap: wrap;
+    height: 1em; }
     [type="stacked"] .chart .segment {
       -webkit-box-flex: 0;
       -webkit-flex: 0 0 0%;
           -ms-flex: 0 0 0%;
               flex: 0 0 0%;
-      height: 1em; }
-      [type="stacked"] .chart .segment:first-of-type .value {
-        border-radius: 1em 0 0 1em; }
-      [type="stacked"] .chart .segment:last-of-type .value {
-        border-radius: 0 1em 1em 0; }
-      [type="stacked"] .chart .segment:only-of-type .value {
-        border-radius: 1em; }
-    [type="stacked"] .chart .label {
-      font-size: .5em; }
+      height: 100%; }
   [type="stacked"].animate .segment {
     -webkit-animation: 1s grow-sector ease-out;
             animation: 1s grow-sector ease-out; }
 
 [type="bars"] {
-  border-radius: .5em;
   width: 1em;
   height: 1em;
   font-size: inherit; }
   [type="bars"] .chart {
     height: 1em;
-    border-radius: .01em;
-    box-shadow: 0 0 0 .03em;
-    background: rgba(54, 54, 57, 0.15);
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -828,80 +804,30 @@ section .button {
             justify-content: space-between; }
     [type="bars"] .chart .segment {
       -webkit-box-flex: 1;
-      -webkit-flex: 1 0 auto;
-          -ms-flex: 1 0 auto;
-              flex: 1 0 auto;
-      width: .1em; }
+      -webkit-flex: 1 1 auto;
+          -ms-flex: 1 1 auto;
+              flex: 1 1 auto;
+      width: .1em;
+      margin: 0 .3rem; }
       [type="bars"] .chart .segment[percent="100"] .value {
         border-radius: 0; }
-    [type="bars"] .chart .value {
-      border-radius: 1em 1em 0 0; }
-    [type="bars"] .chart .label {
-      font-size: .5rem; }
   [type="bars"].animate .segment {
     -webkit-animation: 1s raise-sector ease-out;
             animation: 1s raise-sector ease-out; }
 
-.chart-wrapper {
-  position: relative;
-  display: block; }
-  .chart-wrapper .chart {
-    box-shadow: 0 0 0.3em 0 #000 inset, 0 0 0 0.025em, 0 0.1em 0.2em 0 rgba(0, 0, 0, 0.35);
-    background-color: #363639;
-    background-size: 0.05em 0.05em;
-    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
-  .chart-wrapper .legend {
-    position: relative;
-    font-size: 5%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-    margin: 2em 0 0 0;
-    padding: .5em;
-    background: #363639;
-    border-radius: .5em; }
-    .chart-wrapper .legend div {
-      margin: .5em;
-      -webkit-box-align: start;
-      -webkit-align-items: flex-start;
-          -ms-flex-align: start;
-              align-items: flex-start;
-      -webkit-box-flex: 1;
-      -webkit-flex: 1 1 auto;
-          -ms-flex: 1 1 auto;
-              flex: 1 1 auto;
-      line-height: 0; }
-      .chart-wrapper .legend div:before {
-        content: '';
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        background: currentColor;
-        margin-right: .5em;
-        vertical-align: middle;
-        border-radius: .1em; }
-      .chart-wrapper .legend div span {
-        color: #FFF;
-        position: relative; }
-  .chart-wrapper .supplemental {
-    font-size: 1rem;
-    padding: 1em;
-    line-height: 1.4; }
-
+.workspace .chart {
+  box-shadow: 0 0 1rem 0 #000 inset, 0 0 0 0.25rem, 0 1.5rem 2rem -0.5rem rgba(0, 0, 0, 0.35);
+  background-color: rgba(54, 54, 57, 0.35);
+  background-size: 1rem 1rem;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent); }
 .workspace.spacecat {
-  background-image: url(../spacecat.jpg);
-  background-size: cover;
   color: #FFF; }
+  .workspace.spacecat .canvas {
+    background-image: url(../spacecat.jpg);
+    background-size: cover; }
+.workspace:not(.spacecat) .chart {
+  background-color: #363639; }
 .workspace .controls {
   display: -webkit-box;
   display: -webkit-flex;
@@ -915,4 +841,103 @@ section .button {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
-          justify-content: space-between; }
+          justify-content: space-between;
+  padding-bottom: 3em; }
+
+.chart-wrapper[format=radial] .label {
+  opacity: 0; }
+  .chart-wrapper[format=radial] .label span {
+    background: #363639;
+    color: #FFF; }
+.chart-wrapper[format=radial][type="pie"] .chart:after {
+  background-color: rgba(54, 54, 57, 0.35); }
+.chart-wrapper[format=radial][type="pie"] .totals {
+  color: #FFF; }
+.chart-wrapper[format=radial][type="donut"] .chart {
+  box-shadow: 0 0 0 0.25rem, 0 1.5rem 2rem -0.5rem rgba(0, 0, 0, 0.35); }
+  .chart-wrapper[format=radial][type="donut"] .chart:after {
+    border-radius: 100%;
+    content: attr(title);
+    box-shadow: 0 0 2rem 0 #000 inset;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    pointer-events: none; }
+.chart-wrapper[format=radial][type="donut"] .totals {
+  color: #FFF; }
+.chart-wrapper[format=block] .label span {
+  background: #363639;
+  color: #FFF; }
+.chart-wrapper[format=block] .label:after {
+  border-bottom-color: #363639; }
+.chart-wrapper[format=block][type="stacked"] {
+  border-radius: .5em;
+  width: 50%; }
+  .chart-wrapper[format=block][type="stacked"] .chart {
+    border-radius: 1em;
+    height: 1em; }
+    .chart-wrapper[format=block][type="stacked"] .chart .segment:first-of-type .value {
+      border-radius: 1em 0 0 1em; }
+    .chart-wrapper[format=block][type="stacked"] .chart .segment:last-of-type .value {
+      border-radius: 0 1em 1em 0; }
+    .chart-wrapper[format=block][type="stacked"] .chart .segment:only-of-type .value {
+      border-radius: 1em; }
+.chart-wrapper[format=block][type="bars"] {
+  border-radius: .5em; }
+  .chart-wrapper[format=block][type="bars"] .chart {
+    border-radius: .01em; }
+    .chart-wrapper[format=block][type="bars"] .chart .segment {
+      width: .1em; }
+    .chart-wrapper[format=block][type="bars"] .chart .value {
+      border-radius: .02em .02em 0 0; }
+.chart-wrapper .legend {
+  position: relative;
+  font-size: 5%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin: 2em 0 0 0;
+  padding: .5em;
+  background: #363639;
+  border-radius: .5em; }
+  .chart-wrapper .legend div {
+    margin: .5em;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    line-height: 0; }
+    .chart-wrapper .legend div:before {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background: currentColor;
+      margin-right: .5em;
+      vertical-align: middle;
+      border-radius: .1em; }
+    .chart-wrapper .legend div span {
+      color: #FFF;
+      position: relative; }
+.chart-wrapper .supplemental {
+  font-size: 1rem;
+  padding: 1em;
+  line-height: 1.4; }
