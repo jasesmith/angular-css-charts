@@ -765,9 +765,6 @@ section .button {
     -webkit-flex-direction: row;
         -ms-flex-direction: row;
             flex-direction: row;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
     height: 1em; }
     [type="stacked"] .chart .segment {
       -webkit-box-flex: 0;

@@ -26,13 +26,13 @@ angular.module('app', ['jamfu'])
             // },
             capacity: 1850,
             segments: [
-                {label: 'apple', value: 210, class: 'fg-apple', xcolor: '#fc1770'},
-                {label: 'tangerine', value: 158, class: 'fg-tangerine', xcolor: '#ff7f36'},
-                {label: 'banana', value: 50, class: 'fg-banana', xcolor: '#fff261'},
-                {label: 'kiwi', value: 180, class: 'fg-kiwi', xcolor: '#94ca3d'},
-                {label: 'sky', value: 251, class: 'fg-sky', xcolor: '#15c5ec'},
-                {label: 'berry', value: 307, class: 'fg-berry', xcolor: '#c657af'},
-                {label: 'plum', value: 555, class: 'fg-plum', xcolor: '#7f3fa6'}
+                {label: 'apple', value: 210, xclass: 'fg-apple', color: '#fc1770'},
+                {label: 'tangerine', value: 158, xclass: 'fg-tangerine', color: '#ff7f36'},
+                {label: 'banana', value: 50, xclass: 'fg-banana', color: '#fff261'},
+                {label: 'kiwi', value: 180, xclass: 'fg-kiwi', color: '#94ca3d'},
+                {label: 'sky', value: 251, xclass: 'fg-sky', color: '#15c5ec'},
+                {label: 'berry', value: 307, xclass: 'fg-berry', color: '#c657af'},
+                {label: 'plum', value: 555, xclass: 'fg-plum', color: '#7f3fa6'}
             ]
         };
 

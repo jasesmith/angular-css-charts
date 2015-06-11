@@ -141,7 +141,7 @@
     .chart {
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         height: 1em;
         .segment {
             flex: 0 0 0%;

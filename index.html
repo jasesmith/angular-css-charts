@@ -54,9 +54,16 @@
                             </span>
                         </div>
                         <div class="separator"></div>
+                        <div class="form-row">
+                            <span>label</span>
+                            <span>class</span>
+                            <span>color</span>
+                            <span>value</span>
+                        </div>
                         <div class="form-row" ng-repeat="segment in chart1.segments track by $index">
                             <div>
                                 <input type="text" ng-model="segment.label" />
+                                <input type="text" ng-model="segment.class" />
                                 <input type="text" ng-model="segment.color" style="color: {{segment.color}}" />
                                 <input type="range" value="{{segment.value}}" ng-model="segment.value" min="0" max="{{chartMax}}" step=".1" />
                                 <span>{{segment.value}} <span ng-click="removeSector($index)">&times;</span></span>
@@ -66,6 +73,7 @@
                         <div class="form-row">
                             <div>
                                 <input type="text" placeholder="label" ng-model="newSegment.label" />
+                                <input type="text" placeholder="class" ng-model="newSegment.class" />
                                 <input type="text" placeholder="color" ng-model="newSegment.color" style="color: {{newSegment.color}}" />
                                 <input type="number" placeholder="value" ng-model="newSegment.value" min="0" />
                                 <button ng-click="addSector()">+</button>
