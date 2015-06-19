@@ -36,7 +36,7 @@
                             </div>
                         </div>
 
-                        <div class="visual" style="font-size: {{chart1.settings.type == 'stacked' ? chartSize/10 : chartSize}}{{unit}}">
+                        <div class="visual" ng-attr-style="font-size: {{chart1.settings.type == 'stacked' ? chartSize/10 : chartSize}}{{unit}}">
                             <css-chart config="chart1"></css-chart>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <div>
                                 <input type="text" ng-model="segment.label" />
                                 <input type="text" ng-model="segment.class" />
-                                <input type="text" ng-model="segment.color" style="color: {{segment.color}}" />
+                                <input type="text" ng-model="segment.color" ng-attr-style="color: {{segment.color}}" />
                                 <input type="range" value="{{segment.value}}" ng-model="segment.value" min="0" max="{{chartMax}}" step=".1" />
                                 <span>{{segment.value}} <span ng-click="removeSector($index)">&times;</span></span>
                             </div>
@@ -74,7 +74,7 @@
                             <div>
                                 <input type="text" placeholder="label" ng-model="newSegment.label" />
                                 <input type="text" placeholder="class" ng-model="newSegment.class" />
-                                <input type="text" placeholder="color" ng-model="newSegment.color" style="color: {{newSegment.color}}" />
+                                <input type="text" placeholder="color" ng-model="newSegment.color" ng-attr-style="color: {{newSegment.color}}" />
                                 <input type="number" placeholder="value" ng-model="newSegment.value" min="0" />
                                 <button ng-click="addSector()">+</button>
                             </div>
