@@ -136,7 +136,8 @@ angular.module('app')
                     },
                     preferences: {
                         animate: true,
-                        precision: 1
+                        precision: 1,
+                        showLabels: false
                     }
                 };
 
@@ -222,17 +223,17 @@ angular.module('app')
                     case 'donut':
                     case 'pie':
                         template = '' +
-                            '<div ng-repeat="segment in segments track by $index" class="segment" data-title="{{segment.label}}" style="' + styleMe('radial-segment') +'">' +
-                                '<div class="wedge {{segment.class}}" ng-class="{\'continued\': segment._continued}" style="' + styleMe('radial-wedge') +'">' +
-                                    '<div class="label"><span style="' + styleMe('radial-label') +'">{{segment.label}}: {{segment._percent | number: config.preferences.precision}}%</span></div>' +
+                            '<div ng-repeat="segment in segments track by $index" class="segment" data-title="{{segment.label}}" ng-attr-style="' + styleMe('radial-segment') +'">' +
+                                '<div class="wedge {{segment.class}}" ng-class="{\'continued\': segment._continued}" ng-attr-style="' + styleMe('radial-wedge') +'">' +
+                                    '<div class="label"><span ng-attr-style="' + styleMe('radial-label') +'">{{segment.label}}: {{segment._percent | number: config.preferences.precision}}%</span></div>' +
                                 '</div>' +
                             '</div>';
                         break;
 
                     case 'bars':
                         template = '' +
-                            '<div ng-repeat="segment in segments track by $index" ng-if="!segment._continued" percent="{{segment._percentCap}}" class="segment" data-title="{{segment.label}}" style="height: {{segment._percentCap}}%">' +
-                                '<div class="value {{segment.class}}" style="' + styleMe('bars-value') + '">' +
+                            '<div ng-repeat="segment in segments track by $index" ng-if="!segment._continued" percent="{{segment._percentCap}}" class="segment" data-title="{{segment.label}}" ng-attr-style="height: {{segment._percentCap}}%">' +
+                                '<div class="value {{segment.class}}" ng-attr-style="' + styleMe('bars-value') + '">' +
                                     '<div class="label"><span>{{segment.label}}: {{segment._percentCap | number: config.preferences.precision}}%</span></div>' +
                                 '</div>' +
                             '</div>';
@@ -240,8 +241,8 @@ angular.module('app')
 
                     case 'stacked':
                         template = '' +
-                            '<div ng-repeat="segment in segments track by $index" class="segment" ng-if="!segment._continued && segment.value > 0" percent="{{segment._percent}}" data-title="{{segment.label}}" style="' + styleMe('stacked-segment') +'">' +
-                                '<div class="value {{segment.class}}" style="' + styleMe('stacked-value') + '">' +
+                            '<div ng-repeat="segment in segments track by $index" class="segment" ng-if="!segment._continued && segment.value > 0" percent="{{segment._percent}}" data-title="{{segment.label}}" ng-attr-style="' + styleMe('stacked-segment') +'">' +
+                                '<div class="value {{segment.class}}" ng-attr-style="' + styleMe('stacked-value') + '">' +
                                     '<div class="label"><span>{{segment.label}}: {{segment._percent | number: config.preferences.precision}}%</span></div>' +
                                 '</div>' +
                             '</div>';

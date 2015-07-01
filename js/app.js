@@ -4,7 +4,12 @@ angular.module('app', ['jamfu'])
         $scope.headline = 'CSS Charts';
         $scope.icon = 'pie-chart';
         $scope.spacecat = false;
-        $scope.newSegment = {};
+        $scope.newSegment = {
+            label: '',
+            class: '',
+            color: '',
+            value: '0'
+        };
 
         $scope.sizeUnits = [
             'vmin',
@@ -62,5 +67,11 @@ angular.module('app', ['jamfu'])
             initialSegments = angular.copy($scope.chart1.segments);
             $scope.newSegment = {};
         };
+
+        $scope.removeSector = function($index){
+            $scope.chart1.segments.splice($index, 1);
+            initialSegments = angular.copy($scope.chart1.segments);
+        };
+
 
     }]);
